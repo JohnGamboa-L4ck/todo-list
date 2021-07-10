@@ -1,15 +1,14 @@
 :root {
-    --transparent: rgba(0, 0, 0, .0);
     --light: hsl(0, 0%, 92%);
     --dark: hsl(0, 0%, 12%);
+    --malibu: hsl(192, 93%, 72%);
+    --transparent1: rgba(0,0,0,.1);
 
     --background: var(--light);
-    --foreground: var(--dark);
+    --foreground: var(--malibu);
 }
 
 *, *:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0;
     margin: 0;  
@@ -18,4 +17,86 @@
 body {
     min-height: 100vh;
     background-color: var(--background);
+}
+
+button,
+.search-input {
+    outline: none;
+    border: none;
+    border-radius: 3px;
+}
+
+button {
+    cursor: pointer;
+    padding: .125rem;
+    background-color: transparent;
+    background-color: red;
+}
+
+span.mid {
+    vertical-align: middle;
+    user-select: none;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-comp ,
+.nc-left,
+.search-div,
+.nc-right {
+    display: inline-flex;
+}
+
+.nav-comp {
+    justify-content: space-between;
+    width: 100%;
+    padding: .5rem 3rem .5rem 3rem;
+    background-color: var(--foreground);
+}
+
+.nc-left > *,
+.nc-right > * {
+    margin: 0 .25rem;
+}
+
+.search-div {
+    height: 100%;
+    background-color: var(--foreground);
+}
+
+.search-div > span:first-child {
+    position: absolute;
+    cursor: text;
+}
+
+.search-div button {
+    margin: .2rem 0 .2rem -1.2rem;
+    display: none;
+}
+
+.search-input {
+    padding: 0 1.3rem 0 1.8rem;
+    background-color: var(--transparent1);
+}
+
+.search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.search-input:not(:placeholder-shown) + button {
+    display: block;
+}
+
+.search-div button span {
+    font-size: 1rem;
+}
+
+.app-body {
+    display: flex;
+    flex: 1;
 }
