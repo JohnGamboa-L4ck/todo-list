@@ -1,10 +1,13 @@
 :root {
-    --light: hsl(0, 0%, 92%);
+    --light92: hsl(0, 0%, 92%);
+    --light88: hsl(0, 0%, 88%);
     --dark: hsl(0, 0%, 12%);
     --malibu: hsl(192, 93%, 72%);
+    --auburn: hsl(0, 75%, 65%);
     --transparent1: rgba(0,0,0,.1);
+    --transparent2: rgba(0,0,0,.2);
 
-    --background: var(--light);
+    --background: var(--light92);
     --foreground: var(--malibu);
 }
 
@@ -27,10 +30,14 @@ button,
 }
 
 button {
-    cursor: pointer;
     padding: .125rem;
+    color: var(--dark);
     background-color: transparent;
-    background-color: red;
+}
+
+button,
+.ic-div {
+    cursor: pointer;
 }
 
 span.mid {
@@ -59,9 +66,16 @@ span.mid {
     background-color: var(--foreground);
 }
 
-.nc-left > *,
+.nc-left > * {
+    margin: 0 .25rem 0 0;
+}
+
 .nc-right > * {
-    margin: 0 .25rem;
+    margin: 0 0 0 .25rem;
+}
+
+.nc-right button:first-child {
+    margin: 0;
 }
 
 .search-div {
@@ -71,16 +85,27 @@ span.mid {
 
 .search-div > span:first-child {
     position: absolute;
+    align-self: center;
     cursor: text;
+    margin: .1rem;
+    font-size: 1.6rem;
 }
 
 .search-div button {
-    margin: .2rem 0 .2rem -1.2rem;
+    margin: .2rem 0 .2rem -1.5rem;
+    height: 20px;
+    width: 20px;
+    align-self: center;
     display: none;
 }
 
+.search-div button:hover,
+.search-div button:focus-visible {
+    color: var(--auburn);
+}
+
 .search-input {
-    padding: 0 1.3rem 0 1.8rem;
+    padding: 0 1.6rem 0 1.8rem;
     background-color: var(--transparent1);
 }
 
@@ -92,6 +117,16 @@ span.mid {
     display: block;
 }
 
+.search-div button:focus-visible + .search-input,
+.search-div button:hover + .search-input {
+    background-color: var(--light92);
+}
+
+.search-div:focus-within .search-input,
+.search-div:hover .search-input{
+    background-color: var(--light92);
+}
+
 .search-div button span {
     font-size: 1rem;
 }
@@ -99,4 +134,159 @@ span.mid {
 .app-body {
     display: flex;
     flex: 1;
+}
+
+.info-comp {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem .25rem 0 2.8rem;
+    background-color: var(--light88);
+}
+
+.info-comp > * {
+    text-align: left;
+    font-size: .9rem;
+    width: 294px;
+    padding: 5px;
+}
+
+.info-comp > * > samp {
+    float: right;
+    opacity: .5;
+    margin: 4px 1rem 4px 0;
+}
+
+.ic-div {
+    margin: .25rem 0 0 0;
+    border: 1px solid salmon;
+}
+
+.info-comp > div:first-of-type{
+    margin: 1rem 0 0 0;
+}
+
+.ic-span {
+    margin: 0 .25rem 0 0;
+}
+
+.info-comp > button:first-child span {
+    color:hsl(216, 75%, 51%);
+}
+
+.info-comp > button:nth-child(2) span {
+    color:hsl(120, 100%, 25%);
+}
+
+.info-comp > button:nth-child(3) span {
+    color:hsl(264, 61%, 47%);
+}
+
+.opa {
+    opacity: .5;
+}
+
+.ic-add-btn {
+    float: right;
+    margin: 0px .5rem 0 0;
+    padding: 0;
+    display: none;
+}
+
+.ic-add-btn:hover + strong,
+.ic-add-btn:focus-visible + strong {
+    text-decoration: underline;
+    text-underline-offset: 30%;
+}
+
+.info-comp:focus-within .ic-add-btn,
+.info-comp:hover .ic-add-btn{
+    display: inherit;
+}
+
+.ic-div > div {
+    display: none;
+}
+
+.ic-div > div.show-prj {
+    display: flex;
+    flex-direction: column;
+}
+
+.show-prj {
+    margin: .75rem 0 0 0;
+}
+
+.show-prj > div {
+    text-align: left;
+    display: flex;
+    padding: .5rem;
+    height: 42px;
+    font-size: .9rem;
+    align-items: center;
+    border: 1px solid darkolivegreen;
+}
+
+.show-prj > div > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    align-self: center;
+}
+
+.show-prj button {
+    padding: 0;
+    display: none;
+}
+
+.show-prj > div:hover button,
+.show-prj > div:focus-visible button,
+.show-prj > div:focus-within button{
+    display: flex;
+    margin-left: auto;
+}
+
+.show-prj button:hover,
+.show-prj button:focus-visible {
+    background-color: transparent!important;
+}
+
+.circle {
+    min-width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 .7rem 0 .5rem;
+    background-color: var(--transparent2);
+}
+
+button:hover,
+button:focus-visible {
+    background-color: var(--transparent2);
+}
+
+button:focus-visible {
+    outline: auto;
+}
+
+@media only screen and (max-width: 750px) {
+    .nav-comp {
+        padding: .5rem .5rem .5rem .5rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .search-input {
+        width: 180px;
+    }
+    .search-input:focus {
+        width: 180px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .search-input {
+        width: 100px;
+    }
+    .search-input:focus {
+        width: 100px;
+    }
 }
