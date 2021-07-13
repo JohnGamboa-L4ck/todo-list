@@ -117,11 +117,6 @@ span.mid {
     display: block;
 }
 
-.search-div button:focus-visible + .search-input,
-.search-div button:hover + .search-input {
-    background-color: var(--light92);
-}
-
 .search-div:focus-within .search-input,
 .search-div:hover .search-input{
     background-color: var(--light92);
@@ -158,7 +153,6 @@ span.mid {
 
 .ic-div {
     margin: .25rem 0 0 0;
-    border: 1px solid salmon;
 }
 
 .info-comp > div:first-of-type{
@@ -207,56 +201,83 @@ span.mid {
     display: none;
 }
 
-.ic-div > div.show-prj {
+.ic-div > div.show {
     display: flex;
     flex-direction: column;
 }
 
-.show-prj {
+.show {
     margin: .75rem 0 0 0;
 }
 
-.show-prj > div {
+.show > div {
     text-align: left;
     display: flex;
-    padding: .5rem;
-    height: 42px;
+    padding: .5rem .5rem .5rem .5rem;
+    height: 34px;
     font-size: .9rem;
     align-items: center;
-    border: 1px solid darkolivegreen;
+    border-radius: 3px;
 }
 
-.show-prj > div > span {
+span.unique {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     align-self: center;
+    margin-right: .2rem;
 }
 
-.show-prj button {
+.show button {
     padding: 0;
-    display: none;
+    visibility: hidden;
 }
 
-.show-prj > div:hover button,
-.show-prj > div:focus-visible button,
-.show-prj > div:focus-within button{
-    display: flex;
+.show > div:hover,
+.show > div:focus-visible {
+    background-color: var(--transparent2);
+}
+
+.show > div:hover button,
+.show > div:focus-visible button,
+.show > div:focus-within button{
+    visibility: visible;
     margin-left: auto;
 }
 
-.show-prj button:hover,
-.show-prj button:focus-visible {
+.show button:hover,
+.show button:focus-visible {
     background-color: transparent!important;
 }
 
-.circle {
+.bullet {
     min-width: 10px;
     height: 10px;
     border-radius: 50%;
     margin: 0 .7rem 0 .5rem;
     background-color: var(--transparent2);
 }
+
+.tag {
+    transform: scale(.8);
+    margin: 0 .2rem 0 .2rem;
+    color: var(--transparent2);
+}
+
+.container {
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+}
+
+
+.container > * {
+    border: 1px solid black;
+}
+
+/* overflow-y: scroll; */
 
 button:hover,
 button:focus-visible {
