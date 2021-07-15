@@ -4,6 +4,9 @@
     --dark: hsl(0, 0%, 12%);
     --malibu: hsl(192, 93%, 72%);
     --auburn: hsl(0, 75%, 65%);
+    --mariner: hsl(216, 75%, 51%);
+    --laurel: hsl(120, 100%, 25%);
+    --purple: hsl(264, 61%, 47%);
     --transparent1: rgba(0,0,0,.1);
     --transparent2: rgba(0,0,0,.2);
 
@@ -17,9 +20,16 @@
     margin: 0;  
 }
 
+html,
+body {
+    overflow-x: hidden;
+}
+
 body {
     min-height: 100vh;
     background-color: var(--background);
+    font-family:sans-serif;
+    color: var(--dark);
 }
 
 button,
@@ -27,6 +37,7 @@ button,
     outline: none;
     border: none;
     border-radius: 3px;
+    font-family:sans-serif;
 }
 
 button {
@@ -42,6 +53,10 @@ button,
 
 span.mid {
     vertical-align: middle;
+}
+
+span.mid,
+h1 {
     user-select: none;
 }
 
@@ -84,11 +99,11 @@ span.mid {
 }
 
 .search-div > span:first-child {
-    position: absolute;
     align-self: center;
     cursor: text;
     margin: .1rem;
     font-size: 1.6rem;
+    z-index: 2;
 }
 
 .search-div button {
@@ -106,6 +121,7 @@ span.mid {
 
 .search-input {
     padding: 0 1.6rem 0 1.8rem;
+    margin-left: -1.9rem;
     background-color: var(--transparent1);
 }
 
@@ -118,7 +134,8 @@ span.mid {
 }
 
 .search-div:focus-within .search-input,
-.search-div:hover .search-input{
+.search-div:hover .search-input,
+.search-input:not(:placeholder-shown){
     background-color: var(--light92);
 }
 
@@ -129,6 +146,13 @@ span.mid {
 .app-body {
     display: flex;
     flex: 1;
+    max-height: calc(100% - 46.59px);
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
 }
 
 .info-comp {
@@ -136,6 +160,7 @@ span.mid {
     flex-direction: column;
     padding: 2rem .25rem 0 2.8rem;
     background-color: var(--light88);
+    overflow-y: auto;
 }
 
 .info-comp > * {
@@ -164,15 +189,15 @@ span.mid {
 }
 
 .info-comp > button:first-child span {
-    color:hsl(216, 75%, 51%);
+    color: var(--mariner);
 }
 
 .info-comp > button:nth-child(2) span {
-    color:hsl(120, 100%, 25%);
+    color: var(--laurel);
 }
 
 .info-comp > button:nth-child(3) span {
-    color:hsl(264, 61%, 47%);
+    color: var(--purple);
 }
 
 .opa {
@@ -265,19 +290,129 @@ span.unique {
 }
 
 .container {
-    background-color: aquamarine;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-self: center;
+    justify-content: flex-start;
     align-items: center;
-}
+    overflow-y: auto;
+    padding: 0 2rem 0 2rem;
 
+}
 
 .container > * {
-    border: 1px solid black;
+    max-width: 800px;
+    width: 100%;
 }
 
-/* overflow-y: scroll; */
+.container > footer {
+    margin-top: auto;
+}
+
+.container > header {
+    padding: 2rem 0 1rem 0;
+    position: sticky;
+    top: 0;
+    background-color: var(--light92);
+}
+
+h1 {
+    font-size: 1.3rem;
+}
+
+.todo {
+    display: flex;
+    padding: 2px 0;
+    margin: .5rem 0 .5rem 0;
+    justify-content: flex-start;
+    flex-direction: row;
+    border-bottom: 1px solid var(--transparent1);
+}
+
+.todo,
+.todo * {
+    cursor: pointer;
+}
+
+.checkbox-btn { 
+    height: 18px;
+    max-width: 18px;
+    width: 100%;
+    border: 1px solid gray;
+    margin: .25rem .7rem 0 0;
+}
+
+.checkbox-btn:hover,
+.checkbox-btn:focus-visible {
+    border-color: transparent;
+    background-color: var(--transparent1);
+}
+
+.checkbox-btn > span {
+    visibility: hidden;
+    color: var(--transparent2);
+}
+
+.checkbox-btn:hover > span,
+.checkbox-btn:focus-visible > span {
+    visibility: visible;
+}
+
+.checkbox-btn:active span{
+    color: var(--laurel);
+}
+
+.todo-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.todo-text > label {
+    line-height: 1.4rem;
+}
+
+em {
+    width: 100%;
+}
+
+em,
+em > span {
+    font-size: .9rem!important;
+}
+
+.sched-due {
+    color: var(--auburn);
+}
+
+.sched-today {
+    color: var(--laurel);
+}
+
+.sched-upcom {
+    color: var(--purple);
+}
+
+.todo-tools-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: -20px 0 0 0;
+    visibility: hidden;
+}
+
+.todo-tools-container * {
+    color: gray;
+}
+
+.tool-span {
+    font-size: 1.2rem;
+}
+
+.todo:hover .todo-tools-container,
+.todo:focus-within .todo-tools-container {
+    visibility: visible;
+}
 
 button:hover,
 button:focus-visible {
@@ -286,6 +421,32 @@ button:focus-visible {
 
 button:focus-visible {
     outline: auto;
+}
+
+.add-task-btn {
+    text-align: left;
+    color: gray;
+}
+
+.add-task-btn * {
+    padding: .1rem;
+}
+
+.add-task-btn span {
+    border-radius: 50%;
+    padding: 0;
+    color: var(--auburn);
+}
+
+.add-task-btn:hover,
+.add-task-btn:focus-visible,
+.add-task-btn span {
+    background-color: transparent;
+}
+
+.add-task-btn:hover span,
+.add-task-btn:focus-visible span {
+    color: var(--mariner);
 }
 
 @media only screen and (max-width: 750px) {
