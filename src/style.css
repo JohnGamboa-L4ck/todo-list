@@ -350,7 +350,10 @@ h1 {
 
 .checkbox-btn > span {
     visibility: hidden;
+    font-size: 1.6rem;
     color: var(--transparent2);
+    background-color: burlywood;
+    margin-top: -50px;
 }
 
 .checkbox-btn:hover > span,
@@ -472,13 +475,32 @@ button:focus-visible {
     margin: .25rem 0 0 0;
 }
 
+.empty-state-div *:nth-child(n+2),
+.container footer p {
+    text-align: center;
+}
+
 .empty-state-div p {
     font-size: .9rem;
     color: darkgray;
 }
 
 .container footer {
+    color: var(--auburn);
+    font-size: .9rem!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .25rem 0 .75rem 0;
+}
+
+.container footer span {
+    font-size: 1.25rem!important;
+}
+
+.container footer p {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .container:not(.empty) .empty-state-div,
