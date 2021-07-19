@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" 
         rel="stylesheet">
     <link rel = "stylesheet" href = "style.css">
+    <link rel="icon" 
+      type="image/png" 
+      href="https://openclipart.org/image/400px/303254">
 </head>
 <body>
 <!-- from here -->
@@ -130,15 +133,18 @@
                         </div>
                     </div>
                 </nav>
-                <div class = "container empty "><!-- class: empty -->
+                <div class = "container empty add-triggered">
+                <!-- class: empty, add-triggered, show-sched-selector -->
                     <header>
                         <h1>Inbox</h1>
                     </header>
                     <main>
                         <div class = "todo" tabindex="0">
-                            <button class = "checkbox-btn" tabindex="0">
-                                <span>&#x2714;</span>
-                            </button>
+                            <div class = "checkbox-container">
+                                <button class = "checkbox-btn" tabindex="0">
+                                </button>
+                                <span draggable="false">&#x2714;</span>
+                            </div>
                             <div class = "todo-text">
                                 <label>Lorem ipsum dolor. Lorem ipsum dolor sit 
                                     amet consectetur adipisic numquam! Aliquam, doloremque reprehenderit!
@@ -163,41 +169,61 @@
                                 </div>
                             </div>
                         </div>
-                        <div class = "todo" tabindex="0">
-                            <button class = "checkbox-btn" tabindex="0">
-                                <span>&#x2714;</span>
-                            </button>
-                            <div class = "todo-text">
-                                <label>Lorem ipsum dolor. </label>
-                                <em class = "sched-upcom"><!-- sched-due, sched-today, sched-upcom -->
-                                    <span class="material-icons-outlined mid">event</span>
-                                    Saturday
-                                </em>
-                                <div class = "todo-tools-container">
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">edit</span>
-                                    </button>
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">schedule</span>
-                                    </button>
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">note</span>
-                                    </button>
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">more_horiz</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </main>
-                    <div>
+                    <div class = "add-task-btn-div">
                         <button class = "add-task-btn">
                             <span class="material-icons-outlined mid tool-span">add</span>
                             Add task
                         </button>
                     </div>
-                    <div class = "add-task-div">
-                        <input type = "text">
+                    <div class = "add-task-div"><!-- display-scheduler -->
+                        <input type = "text" placeholder="Task name">
+                        <div class = "add-task-btns-container">
+                            <div>
+                                <button>
+                                    <span class="material-icons-outlined mid">event</span> Schedule
+                                </button>
+                                <button>
+                                    <span class="material-icons-outlined mid">inbox</span> Inbox
+                                </button>
+                            </div>
+                            <div>
+                                <button>
+                                    <span class="material-icons-outlined mid">label</span>
+                                </button>
+                                <button>
+                                    <span class="material-icons-outlined mid">note_add</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class = "scheduler">
+                            <button class = "sched">
+                                <span>Today</span>
+                                <span>Mon</span>
+                            </button>
+                            <button class = "sched">
+                                <span>Tomorrow</span>
+                                <span>Tue</span>
+                            </button>
+                            <button class = "sched">
+                                <span>Next week</span>
+                                <span>Mon 26 July</span>
+                            </button>
+                            <div class = "sched-custom">
+                                <input type = "date">
+                                <button>
+                                    <span class="material-icons-outlined mid">done</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "add-task-main-btns-container">
+                        <button>
+                            Add task
+                        </button>
+                        <button>
+                            Cancel
+                        </button>
                     </div>
                     <div class = "empty-state-div">
                         <img src="./chilling.svg" draggable="false">

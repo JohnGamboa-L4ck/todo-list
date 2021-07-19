@@ -55,7 +55,7 @@ span.mid {
     vertical-align: middle;
 }
 
-span.mid,
+span,
 h1 {
     user-select: none;
 }
@@ -314,6 +314,7 @@ span.unique {
     position: sticky;
     top: 0;
     background-color: var(--light92);
+    z-index: 3;
 }
 
 h1 {
@@ -340,6 +341,8 @@ h1 {
     width: 100%;
     border: 1px solid gray;
     margin: .25rem .7rem 0 0;
+    z-index: 2;
+    position: relative;
 }
 
 .checkbox-btn:hover,
@@ -348,20 +351,23 @@ h1 {
     background-color: var(--transparent1);
 }
 
-.checkbox-btn > span {
-    visibility: hidden;
-    font-size: 1.6rem;
+.checkbox-btn + span {
+    padding: 0;
+    line-height: 1rem;
+    font-size: 2rem;
+    position: relative;
     color: var(--transparent2);
-    background-color: burlywood;
-    margin-top: -50px;
+    visibility: hidden;
+    float: right;
+    margin: -.9rem 0 0 -1rem;    
 }
 
-.checkbox-btn:hover > span,
-.checkbox-btn:focus-visible > span {
+.checkbox-btn:hover + span,
+.checkbox-btn:focus-visible + span {
     visibility: visible;
 }
 
-.checkbox-btn:active span{
+.checkbox-btn:active + span{
     color: var(--laurel);
 }
 
@@ -505,6 +511,124 @@ button:focus-visible {
 
 .container:not(.empty) .empty-state-div,
 .container:not(.empty) footer {
+    display: none;
+}
+
+.add-task-div {
+    border: 1px solid var(--transparent2);
+    border-radius: 3px;
+    padding: 0 .5rem .5rem .5rem;
+    height: 68.48px;
+}
+
+.add-task-div > * {
+    margin-top: .5rem;
+}
+
+.add-task-div input {
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: .9rem;
+    background-color: var(--light92);
+}
+
+.add-task-btns-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-task-btns-container div > button {
+    border: 1px solid var(--transparent2);
+    padding: .25rem;
+}
+
+.add-task-btns-container button > span {
+    font-size: .9rem!important;
+}
+
+.add-task-btns-container > button:nth-child(2) span {
+    color: var(--mariner);
+}
+
+.scheduler {
+    background-color: var(--light92);
+    border-radius: 3px;
+    z-index: 2;
+    position: relative;
+    max-width: 210px;
+    width: 100%;
+    margin: 0 0 0 0;
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 8%),
+        0 0 1px 0 rgb(0 0 0 / 30%);
+    display: none;
+}
+
+.scheduler > * {
+    width: 100%;
+    text-align: left;
+    padding: .5rem .5rem .5rem .5rem;
+}
+
+.sched {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sched span:nth-child(2) {
+    text-align: right;
+    color: gray;
+}
+
+.scheduler input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: .4;
+    cursor: pointer;
+}
+
+.scheduler input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.scheduler .sched-custom {
+    display: flex;
+}
+
+.scheduler .sched-custom button {
+    border: 1px solid var(--transparent1);
+}
+
+.scheduler .sched-custom button > span {
+    font-size: .9rem!important;
+}
+
+.scheduler .sched-custom button:hover > span,
+.scheduler .sched-custom button:focus-visible > span {
+    color: var(--laurel);
+}
+
+.add-task-div.display-scheduler .scheduler {
+    display: inherit;
+}
+
+.add-task-main-btns-container {
+    padding: .5rem 0 .5rem 0;
+}
+
+.add-task-main-btns-container button {
+    padding: .25rem;
+}
+
+.add-task-main-btns-container button:first-child {
+    background-color: var(--malibu);
+    border: 1px solid var(--transparent2);
+}
+
+.container.add-triggered .add-task-btn-div {
+    display: none;
+}
+
+.container:not(.add-triggered) .add-task-div,
+.container:not(.add-triggered) .add-task-main-btns-container {
     display: none;
 }
 
