@@ -7,6 +7,7 @@
     --mariner: hsl(216, 75%, 51%);
     --laurel: hsl(120, 100%, 25%);
     --purple: hsl(264, 61%, 47%);
+    --sun: hsl(34, 93%, 48%);
     --transparent1: rgba(0,0,0,.1);
     --transparent2: rgba(0,0,0,.2);
 
@@ -339,10 +340,25 @@ h1 {
     height: 18px;
     max-width: 18px;
     width: 100%;
-    border: 1px solid gray;
-    margin: .25rem .7rem 0 0;
+    margin: .27rem .7rem 0 0;
     z-index: 2;
     position: relative;
+}
+
+.checkbox-btn.prio1 {
+    border: 2px solid var(--auburn);
+}
+
+.checkbox-btn.prio2 {
+    border: 2px solid var(--sun);
+}
+
+.checkbox-btn.prio3 {
+    border: 2px solid var(--mariner);
+}
+
+.checkbox-btn.prio4 {
+    border: 2px solid var(--transparent2);
 }
 
 .checkbox-btn:hover,
@@ -381,13 +397,31 @@ h1 {
     line-height: 1.4rem;
 }
 
-em {
-    width: 100%;
+.todo-text-note {
+    text-indent: 1rem;
+    font-size: .9rem;
+    margin: 0 0 .25rem 0;
 }
 
+.todo-text-note,
+.todo-text-note > span,
+.todo-text small {
+    color: gray;
+}
+
+.todo-text-note > span,
 em,
 em > span {
     font-size: .9rem!important;
+}
+
+.todo-text small:hover,
+.todo-text small:focus-visible {
+    text-decoration: underline;
+}
+
+em {
+    width: 100%;
 }
 
 .sched-due {
@@ -551,20 +585,28 @@ button:focus-visible {
     color: var(--mariner);
 }
 
-.scheduler {
+.scheduler,
+.carrier {
+    max-width: 210px;
+    width: 100%;    
+}
+
+.scheduler,
+.carrier,
+.labeler,
+.prio-setter {
     background-color: var(--light92);
     border-radius: 3px;
     z-index: 2;
     position: relative;
-    max-width: 210px;
-    width: 100%;
     margin: 0 0 0 0;
     box-shadow: 0 1px 8px 0 rgb(0 0 0 / 8%),
         0 0 1px 0 rgb(0 0 0 / 30%);
     display: none;
 }
 
-.scheduler > * {
+.scheduler > *,
+.carrier > * {
     width: 100%;
     text-align: left;
     padding: .5rem .5rem .5rem .5rem;
@@ -597,9 +639,87 @@ button:focus-visible {
     border: 1px solid var(--transparent1);
 }
 
-.scheduler .sched-custom button > span {
+.scheduler .sched-custom button > span,
+.carrier span,
+.labeler span,
+.prio-setter span {
     font-size: .9rem!important;
 }
+
+.prio-setter button:first-child span {
+    color: var(--auburn);
+}
+
+.prio-setter button:nth-child(2) span {
+    color: var(--sun);
+}
+
+.prio-setter button:nth-child(3) span {
+    color: var(--mariner);
+}
+
+.prio-setter button:nth-child(4) span {
+    color: gray;
+}
+
+.carrier {
+    margin: 0 0 0 -.7rem;
+    max-width: 160px;
+    width: 100%;
+}
+
+.carrier button,
+.labeler button,
+.prio-setter button {
+    display: flex;
+    align-items: center;
+}
+
+.carrier u,
+.labeler u,
+.prio-setter u {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 0 .25rem;
+}
+
+.labeler,
+.prio-setter {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.labeler div,
+.prio-setter div {
+    max-width: 160px;
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    margin: 0 1.8rem 0 auto;
+    background-color: var(--light92);
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 8%),
+        0 0 1px 0 rgb(0 0 0 / 30%);
+    border-radius: 3px;
+}
+
+.prio-setter div {
+    margin: 0 0 0 auto;
+    max-width: 88px;
+}
+
+.prio-setter u {
+    text-decoration: none;
+}
+
+.labeler button,
+.prio-setter button {
+    text-align: left;
+    padding: .5rem;
+}
+
+
 
 .scheduler .sched-custom button:hover > span,
 .scheduler .sched-custom button:focus-visible > span {
@@ -608,6 +728,17 @@ button:focus-visible {
 
 .add-task-div.display-scheduler .scheduler {
     display: inherit;
+}
+
+.add-task-div.display-carrier .carrier,
+.add-task-div.display-labeler .labeler,
+.add-task-div.display-prio-setter .prio-setter {
+    display: block;
+}
+
+.add-task-div .selected,
+.add-task-div .active {
+    background-color: var(--transparent1);
 }
 
 .add-task-main-btns-container {
