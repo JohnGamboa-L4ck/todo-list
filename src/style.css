@@ -559,7 +559,8 @@ button:focus-visible {
     margin-top: .5rem;
 }
 
-.add-task-div input {
+.add-task-div input,
+.quick-add-todo input {
     width: 100%;
     outline: none;
     border: none;
@@ -719,8 +720,6 @@ button:focus-visible {
     padding: .5rem;
 }
 
-
-
 .scheduler .sched-custom button:hover > span,
 .scheduler .sched-custom button:focus-visible > span {
     color: var(--laurel);
@@ -761,6 +760,50 @@ button:focus-visible {
 .container:not(.add-triggered) .add-task-div,
 .container:not(.add-triggered) .add-task-main-btns-container {
     display: none;
+}
+
+.quick-add-todo {
+    display: none;
+    position: absolute;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: var(--transparent2);
+    z-index: 999;
+}
+
+.quick-add-todo > *,
+.quick-add-todo input {
+    width: 100%;
+}
+
+.quick-add-todo > div {
+    background-color: var(--light92);
+    max-width: 278px;
+    width: 100%;
+    border-radius: 3px;
+    padding: .5rem .5rem .5rem .5rem;
+}
+
+.quick-add-todo > div > *:not(:first-child) {
+    margin: .5rem 0 0 0;
+}
+
+.quick-add-todo button {
+    padding: .25rem;
+}
+
+.quick-add-todo button:first-child {
+    background-color: var(--auburn);
+}
+
+.quick-add-todo button:hover,
+.quick-add-todo button:focus-visible {
+    color: var(--light92);
+}
+
+.app.display-quick-add .quick-add-todo {
+    display: grid;
 }
 
 @media only screen and (max-width: 750px) {
