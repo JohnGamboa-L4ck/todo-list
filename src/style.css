@@ -806,6 +806,74 @@ button:focus-visible {
     display: grid;
 }
 
+.notifications {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+    z-index: 999;
+}
+
+.notif-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light92);
+    margin: 40px 0 auto auto;
+    padding: .5rem;
+    max-width: 420px;
+    width: 100%;
+    max-height: 320px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 8%),
+        0 0 1px 0 rgb(0 0 0 / 30%);
+    border-radius: 3px;
+}
+
+.notif-container nav {
+    display: flex;
+    align-items: center;
+    padding: 0 0 .25rem 0;
+    border-bottom: 1px solid var(--transparent2);
+}
+
+.notif-container nav > * {
+    font-size: .9rem;
+    cursor: pointer;
+}
+
+.notif-container button:first-of-type{
+    margin: 0 0 0 .5rem;
+}
+
+.notif-container button:first-of-type:hover,
+.notif-container button:first-of-type:focus-visible {
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.read-all-btn {
+    margin: 0 0 0 auto!important;
+}
+
+.read-all-btn span {
+    font-size: 1.2rem;
+}
+
+.notif-output {
+    margin: 0 .25rem;
+    overflow-y: auto;
+}
+
+.notif-output > * {
+    margin: .25rem 0 0 0;
+    border-bottom: 1px solid var(--transparent1)
+}
+
+.notif > * {
+    font-size: .9rem;
+}
+
 @media only screen and (max-width: 750px) {
     .nav-comp {
         padding: .5rem .5rem .5rem .5rem;
