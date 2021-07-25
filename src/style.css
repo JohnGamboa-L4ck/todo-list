@@ -979,9 +979,33 @@ button:focus-visible {
     .nav-comp {
         padding: .5rem .5rem .5rem .5rem;
     }
+    .info-comp {
+        padding: 1rem .25rem .25rem .25rem;
+        position: absolute;
+        z-index: 1000;
+        top: 47.59px;
+        bottom: 0;
+        display: none;
+    }
+    .info-comp.show-nav {
+        display: flex;
+    }
+    .info-comp > * {
+        width: 294px;
+    }
+    .container > header {
+        padding: 1rem 0 .5rem 0;
+    }
+    .container {
+        padding: 0 1rem 0 1rem;
+    }
+    
 }
 
 @media only screen and (max-width: 550px) {
+    .info-comp > * {
+        width: 242px;
+    }
     .search-input {
         width: 180px;
     }
@@ -990,11 +1014,11 @@ button:focus-visible {
     }
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 321px) {
     .search-input {
-        width: 100px;
+        max-width: 135px;
     }
     .search-input:focus {
-        width: 100px;
+        max-width: 135px;
     }
 }
