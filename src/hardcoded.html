@@ -70,7 +70,7 @@
                             <span class="material-icons-outlined mid">add</span>
                         </button>
                         <strong>Projects</strong>
-                        <div class = "show"><!-- show -->
+                        <div class="show"><!-- show -->
                             <div tabindex="0">
                                 <div class = "bullet"></div>
                                 <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
@@ -101,6 +101,7 @@
                     </div>
                     <div class = "ic-div" tabindex="0">
                         <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
+                        <!-- this span should rotate when showned -->
                         <button class = "ic-add-btn opa">
                             <span class="material-icons-outlined mid">add</span>
                         </button>
@@ -169,13 +170,7 @@
                                         <span class="material-icons-outlined mid tool-span">edit</span>
                                     </button>
                                     <button>
-                                        <span class="material-icons-outlined mid tool-span">schedule</span>
-                                    </button>
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">note</span>
-                                    </button>
-                                    <button>
-                                        <span class="material-icons-outlined mid tool-span">more_horiz</span>
+                                        <span class="material-icons-outlined mid tool-span">delete</span>
                                     </button>
                                 </div>
                             </div>
@@ -352,19 +347,35 @@
             </div>
         </div>
         <div class = "label-creator">
-            <!-- class: on -->
-                <div>
-                    <strong>Add label</strong>
-                    <div class = "label-input">
-                        <label for="new-label-name">Name</label>
-                        <input type = "text" id = "new-label-name">
-                    </div>
-                    <div class = "label-buttons">
-                        <button>Add</button>
-                        <button>Cancel</button>
-                    </div>
+        <!-- class: on -->
+            <div>
+                <strong>Add label</strong>
+                <div class = "label-input">
+                    <label for="new-label-name">Name</label>
+                    <input type = "text" id = "new-label-name">
+                </div>
+                <div class = "label-buttons">
+                    <button>Add</button>
+                    <button>Cancel</button>
                 </div>
             </div>
+        </div>
+        <div class = "todo-editor on">
+        <!-- class: on -->
+            <div>
+                <strong>Edit Todo</strong>
+                <div class = "todo-editor-input">
+                    <label for="updated-name">Task Name</label>
+                    <input type = "text" id = "updated-name">
+                    <label for="updated-name">Name</label>
+                    <input type = "text" id = "updated-name">
+                </div>
+                <div class = "todo-editor-buttons">
+                    <button>Update</button>
+                    <button>Cancel</button>
+                </div>
+            </div>
+        </div>
         <!-- <span class="material-icons-outlined mid">chevron_left</span>
                 <span class="material-icons-outlined mid">chevron_right</span>  
                 <span class="material-icons-outlined mid">expand_more</span>

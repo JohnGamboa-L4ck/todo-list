@@ -764,7 +764,8 @@ button:focus-visible {
 
 .quick-add-todo,
 .project-creator,
-.label-creator {
+.label-creator,
+.todo-editor {
     display: none;
     position: absolute;
     place-items: center;
@@ -781,7 +782,7 @@ button:focus-visible {
 
 .quick-add-todo > div {
     background-color: var(--light92);
-    max-width: 278px;
+    max-width: 480px;
     width: 100%;
     border-radius: 3px;
     padding: .5rem .5rem .5rem .5rem;
@@ -796,7 +797,7 @@ button:focus-visible {
 }
 
 .quick-add-todo button:first-child {
-    background-color: var(--auburn);
+    background-color: var(--mariner);
 }
 
 .quick-add-todo button:hover,
@@ -905,7 +906,8 @@ button:focus-visible {
 }
 
 .project-creator > div,
-.label-creator > div {
+.label-creator > div,
+.todo-editor > div {
     background-color: var(--light92);
     max-width: 420px;
     width: 100%;
@@ -913,7 +915,8 @@ button:focus-visible {
 }
 
 .project-creator > div > *,
-.label-creator > div > * {
+.label-creator > div > *,
+.todo-editor > div > * {
     padding: .5rem;
     margin: 0 0 .25rem 0;
 }
@@ -921,25 +924,31 @@ button:focus-visible {
 .project-creator > div > *:first-child, 
 .project-creator > div > *:nth-child(2),
 .label-creator > div > *:first-child, 
-.label-creator > div > *:nth-child(2){
+.label-creator > div > *:nth-child(2),
+.todo-editor > div > *:first-child, 
+.todo-editor > div > *:nth-child(2){
     border-bottom: 1px solid var(--transparent1);
 }
 
 .project-creator > div,
 .project-input,
 .label-creator > div,
-.label-input {
+.label-input,
+.todo-editor > div,
+.todo-editor-input {
     display: flex;
     flex-direction: column;
 }
 
 .project-input > *,
-.label-input > * {
+.label-input > *,
+.todo-editor-input > * {
     margin: 0 0 .25rem 0;
 }
 
 .project-input input,
-.label-input input {
+.label-input input,
+.todo-editor-input input {
     border: none;
     outline: none;
     border-radius: 2px;
@@ -947,31 +956,36 @@ button:focus-visible {
 }
 
 .project-buttons,
-.label-buttons {
+.label-buttons,
+.todo-editor-buttons {
     display: flex;
     justify-content: flex-end;    
     margin-bottom: 0!important;
 }
 
 .project-creator button,
-.label-creator button {
+.label-creator button,
+.todo-editor button {
     padding: .25rem;
     margin: 0 0 0 .25rem;
     background-color: var(--transparent1);
 }
 
 .project-creator button:first-child,
-.label-creator button:first-child {
+.label-creator button:first-child,
+.todo-editor button:first-child {
     background-color: var(--mariner);
 }
 
 .project-creator.on,
-.label-creator.on {
+.label-creator.on,
+.todo-editor.on {
     display: grid;
 }
 
 .project-input input:focus-visible,
-.label-input input:focus-visible {
+.label-input input:focus-visible,
+.todo-editor-input input:focus-visible {
     outline: 1px solid var(--transparent2);
 }
 
@@ -999,7 +1013,9 @@ button:focus-visible {
     .container {
         padding: 0 1rem 0 1rem;
     }
-    
+    .quick-add-todo > div {
+        max-width: 400px;
+    }
 }
 
 @media only screen and (max-width: 550px) {
@@ -1012,6 +1028,12 @@ button:focus-visible {
     .search-input:focus {
         width: 180px;
     }
+    .quick-add-todo > div {
+        max-width: 300px;
+    }
+    .notif-container {
+        max-width: 310px;
+    }
 }
 
 @media only screen and (max-width: 321px) {
@@ -1020,5 +1042,11 @@ button:focus-visible {
     }
     .search-input:focus {
         max-width: 135px;
+    }
+    .quick-add-todo > div {
+        max-width: 270px;
+    }
+    .notif-container {
+        max-width: 270px;
     }
 }
