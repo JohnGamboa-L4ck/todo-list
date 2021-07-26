@@ -43,9 +43,6 @@
                 <button>
                     <span class="material-icons-outlined mid">notifications</span>
                 </button>
-                <!-- <button>
-                    <span class="material-icons-outlined mid">settings</span>
-                </button> -->
             </div>
         </nav>
         <div class = "app-body">
@@ -360,15 +357,44 @@
                 </div>
             </div>
         </div>
-        <div class = "todo-editor on">
+        <div class = "todo-editor">
         <!-- class: on -->
             <div>
                 <strong>Edit Todo</strong>
                 <div class = "todo-editor-input">
-                    <label for="updated-name">Task Name</label>
+                    <label for="updated-name">Todo Name</label>
                     <input type = "text" id = "updated-name">
-                    <label for="updated-name">Name</label>
-                    <input type = "text" id = "updated-name">
+                    <label for="updated-note">Todo Note</label>
+                    <input type = "text" id = "updated-note">
+                    <label for="updated-schedule">Schedule</label>
+                    <select id="updated-schedule">
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="next-week">Next Week</option>
+                        <option value="custom">Custom</option>
+                        <option value="no-date">No Date</option>
+                    </select>
+                    <label for="updated-selected-project">Project</label>
+                    <select id="updated-selected-project">
+                        <option value="Inbox">Inbox</option>
+                        <option value="project1">project1</option>
+                        <option value="project2">project2</option>
+                        <option value="project3">project3</option>
+                    </select>
+                    <label for="updated-label">Label</label>
+                    <select id="updated-label">
+                        <option value="none">None</option>
+                        <option value="label1">label1</option>
+                        <option value="label2">label2</option>
+                        <option value="label3">label3</option>
+                    </select>
+                    <label for="updated-priority">Priority</label>
+                    <select id="updated-priority">
+                        <option value="priority1">Priority 1</option>
+                        <option value="priority2">Priority 2</option>
+                        <option value="priority3">Priority 3</option>
+                        <option value="priority4">Priority 4</option>
+                    </select>
                 </div>
                 <div class = "todo-editor-buttons">
                     <button>Update</button>

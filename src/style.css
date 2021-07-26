@@ -148,6 +148,7 @@ h1 {
     display: flex;
     flex: 1;
     max-height: calc(100% - 46.59px);
+    overflow-y: hidden;
 }
 
 .wrapper {
@@ -948,11 +949,24 @@ button:focus-visible {
 
 .project-input input,
 .label-input input,
-.todo-editor-input input {
+.todo-editor-input input,
+.todo-editor-input select {
     border: none;
     outline: none;
     border-radius: 2px;
     padding: .25rem;
+}
+
+.todo-editor-input {
+    overflow-y: auto;
+}
+
+.todo-editor-input {
+    padding-top: 0!important;
+}
+
+.todo-editor-input label {
+    margin: .25rem 0 .1rem 0;
 }
 
 .project-buttons,
@@ -1048,5 +1062,11 @@ button:focus-visible {
     }
     .notif-container {
         max-width: 270px;
+    }
+}
+
+@media only screen and (max-height: 420px) {
+    .todo-editor-input {
+        max-height: 180px;
     }
 }
