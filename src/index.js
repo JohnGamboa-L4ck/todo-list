@@ -1,20 +1,27 @@
-import _ from 'lodash';
-import printMe from './print.js';
 import './style.css';
 
-function component() {
-    const element = document.createElement('div');
-    const btn = document.createElement('button');
-  
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
+'use strict';
 
-    btn.innerHTML = 'Click me and check the console!';
-    btn.onclick = printMe;
-  
-    element.appendChild(btn);
-    return element;
-  }
-  
-  document.body.appendChild(component());
+const setLanguage = (() => document.querySelector('html').setAttribute('lang', 'en'))();
+
+const setupHeadTag = (() => {
+    const headElement = document.querySelector('head');
+    const titleElement = document.querySelector('title');
+
+    const newMetaEdge = document.createElement('meta');
+    const newLinkMaterialIcon = document.createElement('link');
+    const newLinkFavicon = document.createElement('link');
+
+    newMetaEdge.setAttribute('http-equiv','X-UA-Compatible');
+    newMetaEdge.setAttribute('content','IE=edge');
+    newLinkMaterialIcon.setAttribute('rel', 'stylesheet');
+    newLinkMaterialIcon
+        .setAttribute('href', 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+    newLinkFavicon.setAttribute('rel', 'icon');
+    newLinkFavicon.setAttribute('type', 'image/png');
+    newLinkFavicon.setAttribute('href', 'https://openclipart.org/image/400px/303254');
+
+    headElement.insertBefore(newMetaEdge, titleElement);
+    headElement.insertBefore(newLinkMaterialIcon, titleElement);
+    headElement.appendChild(newLinkFavicon);
+})();
