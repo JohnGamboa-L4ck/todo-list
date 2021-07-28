@@ -233,6 +233,12 @@ h1 {
     flex-direction: column;
 }
 
+.ic-project > span.rotate,
+.ic-label > span.rotate {
+    transform: rotate(90deg);
+}
+
+
 .show {
     margin: .75rem 0 0 0;
 }
@@ -766,7 +772,9 @@ button:focus-visible {
 .quick-add-todo,
 .project-creator,
 .label-creator,
-.todo-editor {
+.todo-editor,
+.project-editor,
+.label-editor {
     display: none;
     position: absolute;
     place-items: center;
@@ -908,7 +916,9 @@ button:focus-visible {
 
 .project-creator > div,
 .label-creator > div,
-.todo-editor > div {
+.todo-editor > div,
+.project-editor > div,
+.label-editor > div {
     background-color: var(--light92);
     max-width: 420px;
     width: 100%;
@@ -917,7 +927,9 @@ button:focus-visible {
 
 .project-creator > div > *,
 .label-creator > div > *,
-.todo-editor > div > * {
+.todo-editor > div > *,
+.project-editor > div > *,
+.label-editor > div > * {
     padding: .5rem;
     margin: 0 0 .25rem 0;
 }
@@ -927,7 +939,11 @@ button:focus-visible {
 .label-creator > div > *:first-child, 
 .label-creator > div > *:nth-child(2),
 .todo-editor > div > *:first-child, 
-.todo-editor > div > *:nth-child(2){
+.todo-editor > div > *:nth-child(2),
+.project-editor > div > *:first-child,
+.project-editor > div > *:nth-child(2),
+.label-editor > div > *:first-child,
+.label-editor > div > *:nth-child(2) {
     border-bottom: 1px solid var(--transparent1);
 }
 
@@ -936,21 +952,29 @@ button:focus-visible {
 .label-creator > div,
 .label-input,
 .todo-editor > div,
-.todo-editor-input {
+.todo-editor-input,
+.project-editor > div,
+.project-editor-input,
+.label-editor > div,
+.label-editor-input {
     display: flex;
     flex-direction: column;
 }
 
 .project-input > *,
 .label-input > *,
-.todo-editor-input > * {
+.todo-editor-input > *,
+.project-editor-input > *,
+.label-editor-input > * {
     margin: 0 0 .25rem 0;
 }
 
 .project-input input,
 .label-input input,
 .todo-editor-input input,
-.todo-editor-input select {
+.todo-editor-input select,
+.project-editor-input input,
+.label-editor-input input {
     border: none;
     outline: none;
     border-radius: 2px;
@@ -971,7 +995,9 @@ button:focus-visible {
 
 .project-buttons,
 .label-buttons,
-.todo-editor-buttons {
+.todo-editor-buttons,
+.update-project-buttons,
+.update-label-buttons {
     display: flex;
     justify-content: flex-end;    
     margin-bottom: 0!important;
@@ -979,7 +1005,9 @@ button:focus-visible {
 
 .project-creator button,
 .label-creator button,
-.todo-editor button {
+.todo-editor button,
+.project-editor button,
+.label-editor button {
     padding: .25rem;
     margin: 0 0 0 .25rem;
     background-color: var(--transparent1);
@@ -987,19 +1015,30 @@ button:focus-visible {
 
 .project-creator button:first-child,
 .label-creator button:first-child,
-.todo-editor button:first-child {
+.todo-editor button:first-child,
+.project-editor button:first-child,
+.label-editor button:first-child {
     background-color: var(--mariner);
+}
+
+.update-project-buttons button:nth-child(3),
+.update-label-buttons button:nth-child(3) {
+    background-color: var(--auburn);
 }
 
 .project-creator.on,
 .label-creator.on,
-.todo-editor.on {
+.todo-editor.on,
+.project-editor.on,
+.label-editor.on {
     display: grid;
 }
 
 .project-input input:focus-visible,
 .label-input input:focus-visible,
-.todo-editor-input input:focus-visible {
+.todo-editor-input input:focus-visible,
+.project-editor-input input:focus-visible,
+.label-editor-input input:focus-visible {
     outline: 1px solid var(--transparent2);
 }
 

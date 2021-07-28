@@ -60,8 +60,9 @@
                         <span class="material-icons-outlined mid ic-span">upcoming</span>
                         Upcoming<samp>5</samp>
                     </button>
-                    <div class = "ic-div" tabindex="0">
-                        <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
+                    <div class = "ic-div ic-project" tabindex="0">
+                        <span class="material-icons-outlined mid ic-span opa rotate">chevron_right</span>
+                        <!-- class: rotate -->
                         <button class = "ic-add-btn opa">
                             <span class="material-icons-outlined mid">add</span>
                         </button>
@@ -95,7 +96,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "ic-div" tabindex="0">
+                    <div class = "ic-div ic-label" tabindex="0">
                         <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
                         <!-- this span should rotate when showned -->
                         <button class = "ic-add-btn opa">
@@ -342,6 +343,21 @@
                 </div>
             </div>
         </div>
+        <div class = "project-editor">
+        <!-- class: on -->
+            <div>
+                <strong>Project Name</strong>
+                <div class = "project-editor-input">
+                    <label for="update-project-name">Rename to</label>
+                    <input type = "text" id = "update-project-name">
+                </div>
+                <div class = "update-project-buttons">
+                    <button>Update</button>
+                    <button>Cancel</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        </div>
         <div class = "label-creator">
         <!-- class: on -->
             <div>
@@ -353,6 +369,21 @@
                 <div class = "label-buttons">
                     <button>Add</button>
                     <button>Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class = "label-editor">
+        <!-- class: on -->
+            <div>
+                <strong>label Name</strong>
+                <div class = "label-editor-input">
+                    <label for="update-label-name">Rename to</label>
+                    <input type = "text" id = "update-label-name">
+                </div>
+                <div class = "update-label-buttons">
+                    <button>Update</button>
+                    <button>Cancel</button>
+                    <button>Delete</button>
                 </div>
             </div>
         </div>

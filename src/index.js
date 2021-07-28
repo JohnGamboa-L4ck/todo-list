@@ -49,10 +49,10 @@ const createAppNav = (() => {
     nav.setAttribute('class', 'nav-comp');
     nav.innerHTML = `
         <div class = "nc-left">
-            <button id = "nav-btn-menu">
+            <button id = "navBtnMenu">
                 <span class="material-icons-outlined mid">menu</span>
             </button>
-            <button id = "nav-btn-inbox">
+            <button id = "navBtnInbox">
                 <span class="material-icons-outlined mid">home</span>
             </button>
             <form>
@@ -60,7 +60,7 @@ const createAppNav = (() => {
                     <span class="material-icons-outlined mid">search</span>
                     <input type="search" aria-label="Search through all todos" 
                         class = "search-input" placeholder="Search"
-                        id = "nav-input-search">
+                        id = "navInputSearch">
                     <button type = "reset">
                         <span class="material-icons-outlined mid">close</span>
                     </button>
@@ -68,10 +68,10 @@ const createAppNav = (() => {
             </form>
         </div>
         <div class = "nc-right">
-            <button id = "nav-btn-quickAdd">
+            <button id = "navBtnQuickAdd">
                 <span class="material-icons-outlined mid">add</span>
             </button>
-            <button id = "nav-btn-notification">
+            <button id = "navBtnNotification">
                 <span class="material-icons-outlined mid">notifications</span>
             </button>
         </div>
@@ -94,4 +94,91 @@ const createAppBody = (() => {
 const createSidebarNav = (() => {
     const nav = document.createElement('nav');
 
+    nav.setAttribute('class', 'info-comp');
+    nav.innerHTML = `
+        <button id = "sbnavInboxBtn">
+            <span class="material-icons-outlined mid ic-span">inbox</span>
+            Inbox<samp>5</samp>
+        </button>
+        <button id = "sbnavTodayBtn">
+            <span class="material-icons-outlined mid ic-span">calendar_today</span>
+            Today<samp>5</samp>
+        </button>
+        <button id = "sbnavUpcomBtn">
+            <span class="material-icons-outlined mid ic-span">upcoming</span>
+            Upcoming<samp>5</samp>
+        </button>
+        <div class = "ic-div ic-project" tabindex="0" id = "sbnavProjectsDiv-">
+            <span class="material-icons-outlined mid ic-span opa rotate">chevron_right</span>
+            <button class = "ic-add-btn opa" id = "sbnavProjectAdd">
+                <span class="material-icons-outlined mid">add</span>
+            </button>
+            <strong>Projects</strong>
+            <div class="show"><!-- show -->
+                <div tabindex="0">
+                    <div class = "bullet"></div>
+                    <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
+                        adipisicing elit. Sunt perspiciatis, autem ipsum 
+                        aliquid explicabo nulla?
+                    </span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+                <div tabindex="0">
+                    <div class = "bullet"></div>
+                    <span class = "unique">Lorem.</span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+                <div tabindex="0">
+                    <div class = "bullet"></div>
+                    <span class = "unique">
+                        Lorem ipsum dolor sit amet.
+                    </span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
+            <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
+            <!-- this span should rotate when showned -->
+            <button class = "ic-add-btn opa">
+                <span class="material-icons-outlined mid">add</span>
+            </button>
+            <strong>Labels</strong>
+            <div class = "show"><!-- show -->
+                <div tabindex="0">
+                    <span class="material-icons-outlined mid tag">label</span>
+                    <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
+                        adipisicing elit. Sunt perspiciatis, autem ipsum 
+                        aliquid explicabo nulla?
+                    </span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+                <div tabindex="0">
+                    <span class="material-icons-outlined mid tag">label</span>
+                    <span class = "unique">Lorem.</span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+                <div tabindex="0">
+                    <span class="material-icons-outlined mid tag">label</span>
+                    <span class = "unique">
+                        Lorem ipsum dolor sit amet.
+                    </span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.querySelector('.wrapper').appendChild(nav);
 })();
