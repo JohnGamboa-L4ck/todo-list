@@ -45,7 +45,6 @@ const dom = (() => {
 })();
 
 const createAppNav = (() => {
-
     const nav = document.createElement('nav');
     nav.setAttribute('class', 'nav-comp');
     nav.innerHTML = `
@@ -79,4 +78,20 @@ const createAppNav = (() => {
     `;
     
     dom.app.appendChild(nav);
+})();
+
+const createAppBody = (() => {
+    const appBody = document.createElement('div');
+    const wrapper = document.createElement('div');
+
+    appBody.setAttribute('class', 'app-body');
+    wrapper.setAttribute('class', 'wrapper');
+
+    dom.app.appendChild(appBody);
+    appBody.appendChild(wrapper);
+})();
+
+const createSidebarNav = (() => {
+    const nav = document.createElement('nav');
+
 })();
