@@ -110,11 +110,11 @@ const createSidebarNav = (() => {
         </button>
         <div class = "ic-div ic-project" tabindex="0" id = "sbnavProjectsDiv-">
             <span class="material-icons-outlined mid ic-span opa rotate">chevron_right</span>
-            <button class = "ic-add-btn opa" id = "sbnavProjectAdd">
+            <button class = "ic-add-btn opa" id = "sbnavProjectAddBtn">
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Projects</strong>
-            <div class="show"><!-- show -->
+            <div class="show" id = "projectListContainer"><!-- show -->
                 <div tabindex="0">
                     <div class = "bullet"></div>
                     <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
@@ -146,11 +146,11 @@ const createSidebarNav = (() => {
         <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
             <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
             <!-- this span should rotate when showned -->
-            <button class = "ic-add-btn opa">
+            <button class = "ic-add-btn opa" id = "sbnavLabelAddBtn">
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Labels</strong>
-            <div class = "show"><!-- show -->
+            <div class = "show" id = "labelListContainer"><!-- show -->
                 <div tabindex="0">
                     <span class="material-icons-outlined mid tag">label</span>
                     <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
