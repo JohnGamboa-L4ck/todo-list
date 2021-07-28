@@ -35,15 +35,6 @@ const createApp = (() => {
     bodyElement.insertBefore(app, bodyScript);
 })();
 
-// below > function might not be needed
-const dom = (() => {
-    const app = document.querySelector('.app');
-
-    return { 
-        app
-    };
-})();
-
 const createAppNav = (() => {
     const nav = document.createElement('nav');
     nav.setAttribute('class', 'nav-comp');
@@ -77,7 +68,7 @@ const createAppNav = (() => {
         </div>
     `;
     
-    dom.app.appendChild(nav);
+    document.querySelector('.app').appendChild(nav);
 })();
 
 const createAppBody = (() => {
@@ -87,8 +78,8 @@ const createAppBody = (() => {
     appBody.setAttribute('class', 'app-body');
     wrapper.setAttribute('class', 'wrapper');
 
-    dom.app.appendChild(appBody);
     appBody.appendChild(wrapper);
+    document.querySelector('.app').appendChild(appBody);
 })();
 
 const createSidebarNav = (() => {
@@ -181,4 +172,21 @@ const createSidebarNav = (() => {
         </div>
     `;
     document.querySelector('.wrapper').appendChild(nav);
+})();
+
+const createContainer = (() => {
+    const container = document.createElement('div');
+    const header = document.createElement('header');
+    const main = document.createElement('main');
+
+    container.setAttribute('class', 'container');
+    header.innerHTML = `
+        <header>
+            <h1>Inbox</h1>
+        </header>
+    `;
+
+    container.appendChild(header);
+    container.appendChild(main);
+    document.querySelector('.wrapper').appendChild(container);
 })();
