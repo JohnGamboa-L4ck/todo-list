@@ -60,14 +60,13 @@
                         <span class="material-icons-outlined mid ic-span">upcoming</span>
                         Upcoming<samp>5</samp>
                     </button>
-                    <div class = "ic-div ic-project" tabindex="0">
+                    <div class = "ic-div ic-project" tabindex="0" id = "sbnavProjectsDiv">
                         <span class="material-icons-outlined mid ic-span opa rotate">chevron_right</span>
-                        <!-- class: rotate -->
-                        <button class = "ic-add-btn opa">
+                        <button class = "ic-add-btn opa" id = "sbnavProjectAddBtn">
                             <span class="material-icons-outlined mid">add</span>
                         </button>
                         <strong>Projects</strong>
-                        <div class="show"><!-- show -->
+                        <div class="show" id = "projectListContainer"><!-- show -->
                             <div tabindex="0">
                                 <div class = "bullet"></div>
                                 <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
@@ -174,58 +173,62 @@
                         </div>
                     </main>
                     <div class = "add-task-btn-div">
-                        <button class = "add-task-btn">
+                        <button class = "add-task-btn" id = "addTaskBtn">
                             <span class="material-icons-outlined mid tool-span">add</span>
                             Add task
                         </button>
                     </div>
                     <div class = "add-task-div"><!-- display-scheduler, 
                         display-carrier, display-labeler, display-prio-setter -->
-                        <input type = "text" placeholder="Task name">
+                        <input type = "text" placeholder="Task name" id = "addTaskInput">
                         <div class = "add-task-btns-container">
                             <div>
-                                <button class = ""> <!-- active -->
+                                <button id = "selectScheduleBtn"> <!--class: active -->
                                     <span class="material-icons-outlined mid">event</span> Schedule
                                 </button>
-                                <button>
+                                <button id = "selectProjectBtn">
                                     <span class="material-icons-outlined mid">inbox</span> Inbox
                                 </button>
                             </div>
                             <div>
-                                <button>
+                                <button id = "selectLabelBtn">
                                     <span class="material-icons-outlined mid">label</span>
                                 </button>
-                                <button>
+                                <button id = "selectPriorityBtn">
                                     <span class="material-icons-outlined mid">flag</span>
                                 </button>
                             </div>
                         </div>
                         <div class = "scheduler">
-                            <button class = "sched">
+                            <button class = "sched" id = "schedulerTodayBtn">
                                 <span>Today</span>
-                                <span>Mon</span>
+                                <span id = "schedulerTodaySpan">today's date</span>
                             </button>
-                            <button class = "sched">
+                            <button class = "sched" id = "schedulerTwmBtn">
                                 <span>Tomorrow</span>
-                                <span>Tue</span>
+                                <span id = "schedulerTwmBtn">Tue</span>
                             </button>
-                            <button class = "sched">
+                            <button class = "sched" id = "schedulerNextWeekBtn">
                                 <span>Next week</span>
-                                <span>Mon 26 July</span>
+                                <span id = "schedulerNextWeekSpan">Mon 26 July</span>
                             </button>
                             <div class = "sched-custom">
-                                <input type = "date">
-                                <button>
+                                <input type = "date" id = "schedulerCustomInput">
+                                <button id = "schedulerCustomBtn">
                                     <span class="material-icons-outlined mid">done</span>
                                 </button>
                             </div>
+                            <button class = "sched" id = "schedulerNoDateBtn"><!-- class: selected -->
+                                <span>No Date</span>
+                                <span id = "schedulerNoDateSpan">&#x2205;</span>
+                            </button>
                         </div>
                         <div class = "carrier">
-                            <button class = ""> <!-- selected -->
+                            <button id = "projectDefaultInbox">
                                 <span class="material-icons-outlined mid">inbox</span>
                                 <u>Inbox</u>
                             </button>
-                            <button>
+                            <button id = "">
                                 <span class="material-icons-outlined mid">circle</span>
                                 <u>Lorem, ipsum.</u>
                             </button>
@@ -268,7 +271,7 @@
                                     <span class="material-icons-outlined mid">flag</span>
                                     <u>Priority 3</u>
                                 </button>
-                                <button>
+                                <button id = "priorityDefault">
                                     <span class="material-icons-outlined mid">flag</span>
                                     <u>Priority 4</u>
                                 </button>
@@ -276,9 +279,9 @@
                         </div>
                     </div>
                     <div class = "add-task-main-btns-container">
-                        <button>
+                        <button id = "addTaskMainBtn">
                             Add task
-                        </button>
+                        </button id = "addTaskCancelBtn">
                         <button>
                             Cancel
                         </button>

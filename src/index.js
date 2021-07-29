@@ -1,4 +1,6 @@
 import './style.css';
+import implantData from './data.js';
+import test from './data.js';
 
 'use strict';
 
@@ -89,85 +91,32 @@ const createSidebarNav = (() => {
     nav.innerHTML = `
         <button id = "sbnavInboxBtn">
             <span class="material-icons-outlined mid ic-span">inbox</span>
-            Inbox<samp>5</samp>
+            Inbox<samp></samp>
         </button>
         <button id = "sbnavTodayBtn">
             <span class="material-icons-outlined mid ic-span">calendar_today</span>
-            Today<samp>5</samp>
+            Today<samp></samp>
         </button>
         <button id = "sbnavUpcomBtn">
             <span class="material-icons-outlined mid ic-span">upcoming</span>
-            Upcoming<samp>5</samp>
+            Upcoming<samp></samp>
         </button>
-        <div class = "ic-div ic-project" tabindex="0" id = "sbnavProjectsDiv-">
-            <span class="material-icons-outlined mid ic-span opa rotate">chevron_right</span>
+        <div class = "ic-div ic-project" tabindex="0" id = "sbnavProjectsDiv">
+            <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
             <button class = "ic-add-btn opa" id = "sbnavProjectAddBtn">
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Projects</strong>
-            <div class="show" id = "projectListContainer"><!-- show -->
-                <div tabindex="0">
-                    <div class = "bullet"></div>
-                    <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
-                        adipisicing elit. Sunt perspiciatis, autem ipsum 
-                        aliquid explicabo nulla?
-                    </span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
-                <div tabindex="0">
-                    <div class = "bullet"></div>
-                    <span class = "unique">Lorem.</span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
-                <div tabindex="0">
-                    <div class = "bullet"></div>
-                    <span class = "unique">
-                        Lorem ipsum dolor sit amet.
-                    </span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
+            <div id = "projectListContainer"><!-- show -->
             </div>
         </div>
         <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
             <span class="material-icons-outlined mid ic-span opa">chevron_right</span>
-            <!-- this span should rotate when showned -->
             <button class = "ic-add-btn opa" id = "sbnavLabelAddBtn">
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Labels</strong>
             <div class = "show" id = "labelListContainer"><!-- show -->
-                <div tabindex="0">
-                    <span class="material-icons-outlined mid tag">label</span>
-                    <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
-                        adipisicing elit. Sunt perspiciatis, autem ipsum 
-                        aliquid explicabo nulla?
-                    </span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
-                <div tabindex="0">
-                    <span class="material-icons-outlined mid tag">label</span>
-                    <span class = "unique">Lorem.</span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
-                <div tabindex="0">
-                    <span class="material-icons-outlined mid tag">label</span>
-                    <span class = "unique">
-                        Lorem ipsum dolor sit amet.
-                    </span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                </div>
             </div>
         </div>
     `;
@@ -178,15 +127,135 @@ const createContainer = (() => {
     const container = document.createElement('div');
     const header = document.createElement('header');
     const main = document.createElement('main');
+    const div = document.createElement('div');
 
     container.setAttribute('class', 'container');
     header.innerHTML = `
-        <header>
-            <h1>Inbox</h1>
-        </header>
+        <h1>Inbox</h1>
+    `;
+    div.setAttribute('class', 'add-task-btn-div');
+    div.innerHTML = `
+        <button class = "add-task-btn" id = "addTaskBtn">
+            <span class="material-icons-outlined mid tool-span">add</span>
+            Add task
+        </button>
     `;
 
     container.appendChild(header);
     container.appendChild(main);
+    container.appendChild(div);
     document.querySelector('.wrapper').appendChild(container);
+})();
+
+const createAddTaskDiv = (() => {
+    const div = document.createElement('div');
+
+    div.setAttribute('class', 'add-task-div');
+    div.innerHTML = `
+        <input type = "text" placeholder="Task name" id = "addTaskInput">
+        <div class = "add-task-btns-container">
+            <div>
+                <button id = "selectScheduleBtn">
+                    <span class="material-icons-outlined mid">event</span> Schedule
+                </button>
+                <button id = "selectProjectBtn">
+                    <span class="material-icons-outlined mid">inbox</span> Inbox
+                </button>
+            </div>
+            <div>
+                <button id = "selectLabelBtn">
+                    <span class="material-icons-outlined mid">label</span>
+                </button>
+                <button id = "selectPriorityBtn">
+                    <span class="material-icons-outlined mid">flag</span>
+                </button>
+            </div>
+        </div>
+        <div class = "scheduler">
+            <button class = "sched" id = "schedulerTodayBtn">
+                <span>Today</span>
+                <span id = "schedulerTodaySpan">today's date</span>
+            </button>
+            <button class = "sched" id = "schedulerTwmBtn">
+                <span>Tomorrow</span>
+                <span id = "schedulerTwmBtn">Tue</span>
+            </button>
+            <button class = "sched" id = "schedulerNextWeekBtn">
+                <span>Next week</span>
+                <span id = "schedulerNextWeekSpan">Mon 26 July</span>
+            </button>
+            <div class = "sched-custom">
+                <input type = "date" id = "schedulerCustomInput">
+                <button id = "schedulerCustomBtn">
+                    <span class="material-icons-outlined mid">done</span>
+                </button>
+            </div>
+            <button class = "sched" id = "schedulerNoDateBtn">
+                <span>No Date</span>
+                <span id = "schedulerNoDateSpan">&#x2205;</span>
+            </button>
+        </div>
+        <div class = "carrier">
+            <button id = "projectDefaultInbox">
+                <span class="material-icons-outlined mid">inbox</span>
+                <u>Inbox</u>
+            </button>
+            <button id = "">
+                <span class="material-icons-outlined mid">circle</span>
+                <u>Lorem, ipsum.</u>
+            </button>
+            <button>
+                <span class="material-icons-outlined mid">circle</span>
+                <u>Lorem ipsum dolor sit amet.</u>
+            </button>
+            <button>
+                <span class="material-icons-outlined mid">circle</span>
+                <u>Lorem, ipsum.</u>
+            </button>
+        </div>
+        <div class = "labeler">
+            <div>
+                <button>
+                    <span class="material-icons-outlined mid">label</span>
+                    <u>Lorem, ipsum.</u>
+                </button>
+                <button>
+                    <span class="material-icons-outlined mid">label</span>
+                    <u>Lorem ipsum dolor sit amet.</u>
+                </button>
+                <button>
+                    <span class="material-icons-outlined mid">label</span>
+                    <u>Lorem ipsum dolor sit amet.</u>
+                </button>
+            </div>
+        </div>
+        <div class = "prio-setter">
+            <div>
+                <button>
+                    <span class="material-icons-outlined mid">flag</span>
+                    <u>Priority 1</u>
+                </button>
+                <button>
+                    <span class="material-icons-outlined mid">flag</span>
+                    <u>Priority 2</u>
+                </button>
+                <button>
+                    <span class="material-icons-outlined mid">flag</span>
+                    <u>Priority 3</u>
+                </button>
+                <button id = "priorityDefault">
+                    <span class="material-icons-outlined mid">flag</span>
+                    <u>Priority 4</u>
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.querySelector('.container').appendChild(div);
+})();
+
+const createMoreContainerItems = (() => {
+    // add-task-main-btns-container
+    // empty-state-div
+    // footer
 })();
