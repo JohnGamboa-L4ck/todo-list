@@ -1,4 +1,5 @@
 import './style.css';
+import chillingImg from './chilling.svg';
 import implantData from './data.js';
 import test from './data.js';
 
@@ -256,6 +257,32 @@ const createAddTaskDiv = (() => {
 
 const createMoreContainerItems = (() => {
     // add-task-main-btns-container
+    const div1 = document.createElement('div');
     // empty-state-div
+    const div2 = document.createElement('div');
     // footer
+    const footer = document.createElement('footer');
+
+    div1.setAttribute('class', 'add-task-main-btns-container');
+    div2.setAttribute('class', 'empty-state-div');
+    div1.innerHTML = `
+        <button id = "addTaskMainBtn">
+            Add task
+        </button id = "addTaskCancelBtn">
+        <button>
+            Cancel
+        </button>
+    `;
+    div2.innerHTML = `
+        <img src="${chillingImg}" draggable="false">
+        <h4>All clear</h4>
+        <p>Looks like everything's organized in the right place.</p>
+    `;
+    footer.innerHTML = `
+        <span class="material-icons-outlined mid">help_outline</span>
+        <p>How to best use the Inbox</p>
+    `;
+    document.querySelector('.container').appendChild(div1);
+    document.querySelector('.container').appendChild(div2);
+    document.querySelector('.container').appendChild(footer);
 })();
