@@ -5,8 +5,8 @@ const implantData = (() => {
     localStorage.setItem('todos', JSON.stringify([]));
 })();
 
-const Todo = function( id, title, dueDate, note, priority, project, label ){
-    return { id, title, dueDate, note, priority, project, label }
+const Todo = function( id, title, dueDate, note, priority, project, label, dueDateNotifSent ){
+    return { id, title, dueDate, note, priority, project, label, dueDateNotifSent }
 };
 
 //create container for projects
@@ -34,7 +34,8 @@ const test = (function(){
         '',
         'priority 1',
         'inbox',
-        ''
+        '',
+        'none'
     );
 
     let array = JSON.parse(localStorage.getItem('todos'));

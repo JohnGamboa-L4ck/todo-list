@@ -39,8 +39,9 @@
                 <button>
                     <span class="material-icons-outlined mid">add</span>
                 </button>
-                <button>
+                <button class = "nav-btn-notification">
                     <span class="material-icons-outlined mid">notifications</span>
+                    <small>16</small>
                 </button>
             </div>
         </nav>
@@ -298,28 +299,28 @@
                 </div>
             </div>
         </div>
-        <div class = "quick-add-todo">
+        <div class = "quick-add-todo" id = "quickAddTodo">
         <!-- class: on -->
             <div>
-                <input type = "text" placeholder="Task name">
+                <input type = "text" placeholder="Task name" id = "quickAddInput">
                 <div>
-                    <button>Add task</button>
-                    <button>Cancel</button>
+                    <button id = "quickAddSubmit">Add task</button>
+                    <button id = "quickAddCancel">Cancel</button>
                 </div>
             </div>
         </div>
-        <div class = "notifications">
+        <div class = "notifications on" id = "notifications">
         <!-- class: on -->
             <div class = "notif-container">
                 <nav>
                     <strong>Notifications</strong>
-                    <button class = "read-all-btn">
+                    <button class = "read-all-btn" id = "notifReadAllBtn">
                         <span class="material-icons-outlined mid">done_all</span>
                     </button>
                 </nav>
                 <div class = "notif-output">
                     <div class = "notif"> 
-                        <span>Lorem, ipsum dolor. Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</span>
+                        <span id = "notif-title">Lorem, ipsum dolor. Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</span>
                         <div class = "notif-extra">
                             <small>Task due</small>
                             <div>
@@ -332,97 +333,97 @@
                 </div>
             </div>
         </div>
-        <div class = "project-creator">
+        <div class = "project-creator" id = "projectCreator">
         <!-- class: on -->
             <div>
                 <strong>Add project</strong>
                 <div class = "project-input">
-                    <label for="new-project-name">Name</label>
-                    <input type = "text" id = "new-project-name">
+                    <label for="newProjectName">Name</label>
+                    <input type = "text" id = "newProjectName">
                 </div>
                 <div class = "project-buttons">
-                    <button>Add</button>
-                    <button>Cancel</button>
+                    <button id = "projectAddButton">Add</button>
+                    <button id = "projectCancelButton">Cancel</button>
                 </div>
             </div>
         </div>
-        <div class = "project-editor">
+        <div class = "project-editor" id = "projectEditor">
         <!-- class: on -->
             <div>
                 <strong>Project Name</strong>
                 <div class = "project-editor-input">
-                    <label for="update-project-name">Rename to</label>
-                    <input type = "text" id = "update-project-name">
+                    <label for="updateProjectName">Rename to</label>
+                    <input type = "text" id = "updateProjectName">
                 </div>
                 <div class = "update-project-buttons">
-                    <button>Update</button>
-                    <button>Cancel</button>
-                    <button>Delete</button>
+                    <button id = "updateProjectBtn">Update</button>
+                    <button id = "cancelProjectBtn">Cancel</button>
+                    <button id = "deleteProjectBtn">Delete</button>
                 </div>
             </div>
         </div>
-        <div class = "label-creator">
+        <div class = "label-creator" id = "labelCreator">
         <!-- class: on -->
             <div>
                 <strong>Add label</strong>
                 <div class = "label-input">
-                    <label for="new-label-name">Name</label>
-                    <input type = "text" id = "new-label-name">
+                    <label for="addLabelInput">Name</label>
+                    <input type = "text" id = "addLabelInput">
                 </div>
                 <div class = "label-buttons">
-                    <button>Add</button>
-                    <button>Cancel</button>
+                    <button id = "addNewLabelBtn">Add</button>
+                    <button id = "cancelAddLabelBtn">Cancel</button>
                 </div>
             </div>
         </div>
-        <div class = "label-editor">
+        <div class = "label-editor" id = "labelEditor">
         <!-- class: on -->
             <div>
                 <strong>label Name</strong>
                 <div class = "label-editor-input">
-                    <label for="update-label-name">Rename to</label>
-                    <input type = "text" id = "update-label-name">
+                    <label for="updateLabelName">Rename to</label>
+                    <input type = "text" id = "updateLabelName">
                 </div>
                 <div class = "update-label-buttons">
-                    <button>Update</button>
-                    <button>Cancel</button>
-                    <button>Delete</button>
+                    <button id = "updateLabelBtn">Update</button>
+                    <button id = "cancelUpdateBtn">Cancel</button>
+                    <button id = "deleteLabelBtn">Delete</button>
                 </div>
             </div>
         </div>
-        <div class = "todo-editor">
+        <div class = "todo-editor" id = "todoEditor">
         <!-- class: on -->
             <div>
                 <strong>Edit Todo</strong>
                 <div class = "todo-editor-input">
-                    <label for="updated-name">Todo Name</label>
-                    <input type = "text" id = "updated-name">
-                    <label for="updated-note">Todo Note</label>
-                    <input type = "text" id = "updated-note">
-                    <label for="updated-schedule">Schedule</label>
-                    <select id="updated-schedule">
+                    <label for="updatedName">Todo Name</label>
+                    <input type = "text" id = "updatedName">
+                    <label for="updatedNote">Todo Note</label>
+                    <input type = "text" id = "updatedNote">
+                    <label for="updatedSchedule">Schedule</label>
+                    <select id="updatedSchedule">
                         <option value="today">Today</option>
                         <option value="tomorrow">Tomorrow</option>
                         <option value="next-week">Next Week</option>
                         <option value="custom">Custom</option>
                         <option value="no-date">No Date</option>
                     </select>
-                    <label for="updated-selected-project">Project</label>
-                    <select id="updated-selected-project">
+                    <label for="updatedSelectedProject">Project</label>
+                    <select id="updatedSelectedProject">
                         <option value="Inbox">Inbox</option>
                         <option value="project1">project1</option>
                         <option value="project2">project2</option>
                         <option value="project3">project3</option>
                     </select>
-                    <label for="updated-label">Label</label>
-                    <select id="updated-label">
+                    <label for="updatedLabel">Label</label>
+                    <select id="updatedLabel">
                         <option value="none">None</option>
                         <option value="label1">label1</option>
                         <option value="label2">label2</option>
                         <option value="label3">label3</option>
                     </select>
-                    <label for="updated-priority">Priority</label>
-                    <select id="updated-priority">
+                    <label for="updatedPriority">Priority</label>
+                    <select id="updatedPriority">
                         <option value="priority1">Priority 1</option>
                         <option value="priority2">Priority 2</option>
                         <option value="priority3">Priority 3</option>
@@ -430,8 +431,8 @@
                     </select>
                 </div>
                 <div class = "todo-editor-buttons">
-                    <button>Update</button>
-                    <button>Cancel</button>
+                    <button id = "updateTodo">Update</button>
+                    <button id = "cancelUpdateTodo">Cancel</button>
                 </div>
             </div>
         </div>

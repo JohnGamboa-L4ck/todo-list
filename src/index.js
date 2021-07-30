@@ -65,8 +65,9 @@ const createAppNav = (() => {
             <button id = "navBtnQuickAdd">
                 <span class="material-icons-outlined mid">add</span>
             </button>
-            <button id = "navBtnNotification">
+            <button class = "nav-btn-notification" id = "navBtnNotification">
                 <span class="material-icons-outlined mid">notifications</span>
+                <small></small>
             </button>
         </div>
     `;
@@ -256,11 +257,8 @@ const createAddTaskDiv = (() => {
 })();
 
 const createMoreContainerItems = (() => {
-    // add-task-main-btns-container
     const div1 = document.createElement('div');
-    // empty-state-div
     const div2 = document.createElement('div');
-    // footer
     const footer = document.createElement('footer');
 
     div1.setAttribute('class', 'add-task-main-btns-container');
@@ -282,7 +280,143 @@ const createMoreContainerItems = (() => {
         <span class="material-icons-outlined mid">help_outline</span>
         <p>How to best use the Inbox</p>
     `;
+
     document.querySelector('.container').appendChild(div1);
     document.querySelector('.container').appendChild(div2);
     document.querySelector('.container').appendChild(footer);
+})();
+
+const createHiddenModals = (() => {
+    document.querySelector('.app').innerHTML += `
+        <div class = "quick-add-todo" id = "quickAddTodo">
+            <div>
+                <input type = "text" placeholder="Task name" id = "quickAddInput">
+                <div>
+                    <button id = "quickAddSubmit">Add task</button>
+                    <button id = "quickAddCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class = "notifications" id = "notifications">
+            <div class = "notif-container">
+                <nav>
+                    <strong>Notifications</strong>
+                    <button class = "read-all-btn" id = "notifReadAllBtn">
+                        <span class="material-icons-outlined mid">done_all</span>
+                    </button>
+                </nav>
+                <div class = "notif-output">
+                    <div class = "notif"> 
+                        <span id = "notif-title">Lorem, ipsum dolor. Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</span>
+                        <div class = "notif-extra">
+                            <small>Task due</small>
+                            <div>
+                                <button>
+                                    <span class="material-icons-outlined mid">done</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = "project-creator" id = "projectCreator">
+            <div>
+                <strong>Add project</strong>
+                <div class = "project-input">
+                    <label for="newProjectName">Name</label>
+                    <input type = "text" id = "newProjectName">
+                </div>
+                <div class = "project-buttons">
+                    <button id = "projectAddButton">Add</button>
+                    <button id = "projectCancelButton">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class = "project-editor" id = "projectEditor">
+            <div>
+                <strong>Project Name</strong>
+                <div class = "project-editor-input">
+                    <label for="updateProjectName">Rename to</label>
+                    <input type = "text" id = "updateProjectName">
+                </div>
+                <div class = "update-project-buttons">
+                    <button id = "updateProjectBtn">Update</button>
+                    <button id = "cancelProjectBtn">Cancel</button>
+                    <button id = "deleteProjectBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class = "label-creator" id = "labelCreator">
+            <div>
+                <strong>Add label</strong>
+                <div class = "label-input">
+                    <label for="addLabelInput">Name</label>
+                    <input type = "text" id = "addLabelInput">
+                </div>
+                <div class = "label-buttons">
+                    <button id = "addNewLabelBtn">Add</button>
+                    <button id = "cancelAddLabelBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class = "label-editor" id = "labelEditor">
+            <div>
+                <strong>label Name</strong>
+                <div class = "label-editor-input">
+                    <label for="updateLabelName">Rename to</label>
+                    <input type = "text" id = "updateLabelName">
+                </div>
+                <div class = "update-label-buttons">
+                    <button id = "updateLabelBtn">Update</button>
+                    <button id = "cancelUpdateBtn">Cancel</button>
+                    <button id = "deleteLabelBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class = "todo-editor" id = "todoEditor">
+            <div>
+                <strong>Edit Todo</strong>
+                <div class = "todo-editor-input">
+                    <label for="updatedName">Todo Name</label>
+                    <input type = "text" id = "updatedName">
+                    <label for="updatedNote">Todo Note</label>
+                    <input type = "text" id = "updatedNote">
+                    <label for="updatedSchedule">Schedule</label>
+                    <select id="updatedSchedule">
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="next-week">Next Week</option>
+                        <option value="custom">Custom</option>
+                        <option value="no-date">No Date</option>
+                    </select>
+                    <label for="updatedSelectedProject">Project</label>
+                    <select id="updatedSelectedProject">
+                        <option value="Inbox">Inbox</option>
+                        <option value="project1">project1</option>
+                        <option value="project2">project2</option>
+                        <option value="project3">project3</option>
+                    </select>
+                    <label for="updatedLabel">Label</label>
+                    <select id="updatedLabel">
+                        <option value="none">None</option>
+                        <option value="label1">label1</option>
+                        <option value="label2">label2</option>
+                        <option value="label3">label3</option>
+                    </select>
+                    <label for="updatedPriority">Priority</label>
+                    <select id="updatedPriority">
+                        <option value="priority1">Priority 1</option>
+                        <option value="priority2">Priority 2</option>
+                        <option value="priority3">Priority 3</option>
+                        <option value="priority4">Priority 4</option>
+                    </select>
+                </div>
+                <div class = "todo-editor-buttons">
+                    <button id = "updateTodo">Update</button>
+                    <button id = "cancelUpdateTodo">Cancel</button>
+                </div>
+            </div>
+        </div>
+    `;
 })();

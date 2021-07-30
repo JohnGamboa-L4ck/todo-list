@@ -858,6 +858,21 @@ button:focus-visible {
     margin: 0 0 0 .5rem;
 }
 
+.nav-btn-notification small {
+    position: absolute; 
+    color: var(--auburn);
+    margin-left: -.85rem; 
+    background-color: var(--malibu);
+    padding: 0 1px;
+}
+
+.nav-btn-notification:hover small,
+.nav-btn-notification:focus-visible small {
+    background-color: transparent!important;
+    color: var(--light92)!important;
+    font-weight: bold;
+}
+
 .read-all-btn {
     margin: 0 0 0 auto!important;
 }
