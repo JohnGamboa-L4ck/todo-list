@@ -1,6 +1,6 @@
 'use strict';
 
-const implantData = (() => {
+const embedLocalStorage = (() => {
     if(!localStorage.getItem('todos'))
     localStorage.setItem('todos', JSON.stringify([]));
 })();
@@ -60,4 +60,4 @@ const test = (function(){
 
 })();
 
-export { implantData, test };
+export { embedLocalStorage, test };

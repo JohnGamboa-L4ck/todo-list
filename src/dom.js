@@ -43,10 +43,10 @@ const createAppNav = () => {
             <button id = "navBtnMenu">
                 <span class="material-icons-outlined mid">menu</span>
             </button>
-            <button id = "navBtnInbox">
+            <button id = "navBtnHome">
                 <span class="material-icons-outlined mid">home</span>
             </button>
-            <form>
+            <form id = "formSearch">
                 <div class = "search-div">
                     <span class="material-icons-outlined mid">search</span>
                     <input type="search" aria-label="Search through all todos" 
