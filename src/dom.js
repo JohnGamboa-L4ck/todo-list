@@ -87,6 +87,7 @@ const createSidebarNav = () => {
     const nav = document.createElement('nav');
 
     nav.setAttribute('class', 'info-comp');
+    nav.setAttribute('id', 'navInfoComp');
     nav.innerHTML = `
         <button id = "sbnavInboxBtn">
             <span class="material-icons-outlined mid ic-span">inbox</span>
@@ -128,11 +129,13 @@ const createContainer = () => {
     const main = document.createElement('main');
     const div = document.createElement('div');
 
-    container.setAttribute('class', 'container');
+    container.setAttribute('class', 'container add-triggered');
+    container.setAttribute('id', 'container');
     header.innerHTML = `
-        <h1>Inbox</h1>
+        <h1 id = "header">Inbox</h1>
     `;
     div.setAttribute('class', 'add-task-btn-div');
+    div.setAttribute('id', 'addTaskBtnDiv');
     div.innerHTML = `
         <button class = "add-task-btn" id = "addTaskBtn">
             <span class="material-icons-outlined mid tool-span">add</span>
@@ -149,7 +152,8 @@ const createContainer = () => {
 const createAddTaskDiv = () => {
     const div = document.createElement('div');
 
-    div.setAttribute('class', 'add-task-div');
+    div.setAttribute('class', 'add-task-div display-carrier');
+    div.setAttribute('id', 'addTaskDiv');
     div.innerHTML = `
         <input type = "text" placeholder="Task name" id = "addTaskInput">
         <div class = "add-task-btns-container">
@@ -260,11 +264,14 @@ const createMoreContainerItems = () => {
 
     div1.setAttribute('class', 'add-task-main-btns-container');
     div2.setAttribute('class', 'empty-state-div');
+    div2.setAttribute('id', 'emptyStateDiv');
+    footer.setAttribute('id', 'footer');
+
     div1.innerHTML = `
         <button id = "addTaskMainBtn">
             Add task
-        </button id = "addTaskCancelBtn">
-        <button>
+        </button>
+        <button id = "addTaskCancelBtn">
             Cancel
         </button>
     `;
@@ -275,7 +282,7 @@ const createMoreContainerItems = () => {
     `;
     footer.innerHTML = `
         <span class="material-icons-outlined mid">help_outline</span>
-        <p>How to best use the Inbox</p>
+        <p id = "help">How to best use this App</p>
     `;
 
     document.querySelector('.container').appendChild(div1);

@@ -2,7 +2,7 @@ import './style.css';
 import createApp from './dom.js';
 import embedLocalStorage from './data.js';
 import test from './data.js';
-import { hNav, vNav, container, modal } from './selector.js';
+import { hNav, vNav, container, task, modal } from './selector.js';
 
 'use strict';
 

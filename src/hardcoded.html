@@ -47,7 +47,7 @@
         </nav>
         <div class = "app-body">
             <div class = "wrapper">
-                <nav class = "info-comp">
+                <nav class = "info-comp" id = "navInfoComp">
                 <!-- class: show-nav -->
                     <button id = "inbox-btn">
                         <span class="material-icons-outlined mid ic-span">inbox</span>
@@ -137,7 +137,7 @@
                 <!-- class: empty, add-triggered
                     show-sched-selector(is this one needed?) -->
                     <header>
-                        <h1>Inbox</h1>
+                        <h1 id = "header">Inbox</h1>
                     </header>
                     <main>
                         <div class = "todo" tabindex="0">
@@ -282,8 +282,8 @@
                     <div class = "add-task-main-btns-container">
                         <button id = "addTaskMainBtn">
                             Add task
-                        </button id = "addTaskCancelBtn">
-                        <button>
+                        </button>
+                        <button id = "addTaskCancelBtn">
                             Cancel
                         </button>
                     </div>
