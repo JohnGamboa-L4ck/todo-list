@@ -107,7 +107,7 @@ const createSidebarNav = () => {
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Projects</strong>
-            <div id = "projectListContainer"><!-- show -->
+            <div id = "projectListContainer">
             </div>
         </div>
         <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
@@ -116,7 +116,7 @@ const createSidebarNav = () => {
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Labels</strong>
-            <div class = "show" id = "labelListContainer"><!-- show -->
+            <div class = "show" id = "labelListContainer">
             </div>
         </div>
     `;
