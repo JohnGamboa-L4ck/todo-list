@@ -64,7 +64,7 @@ const createAppNav = () => {
             </button>
             <button class = "nav-btn-notification" id = "navBtnNotification">
                 <span class="material-icons-outlined mid">notifications</span>
-                <small></small>
+                <small id = "navBtnNotificationCount"></small>
             </button>
         </div>
     `;
@@ -129,7 +129,7 @@ const createContainer = () => {
     const main = document.createElement('main');
     const div = document.createElement('div');
 
-    container.setAttribute('class', 'container add-triggered');
+    container.setAttribute('class', 'container');
     container.setAttribute('id', 'container');
     header.innerHTML = `
         <h1 id = "header">Inbox</h1>
@@ -152,7 +152,7 @@ const createContainer = () => {
 const createAddTaskDiv = () => {
     const div = document.createElement('div');
 
-    div.setAttribute('class', 'add-task-div display-carrier');
+    div.setAttribute('class', 'add-task-div');
     div.setAttribute('id', 'addTaskDiv');
     div.innerHTML = `
         <input type = "text" placeholder="Task name" id = "addTaskInput">
@@ -198,51 +198,27 @@ const createAddTaskDiv = () => {
                 <span id = "schedulerNoDateSpan">&#x2205;</span>
             </button>
         </div>
-        <div class = "carrier">
+        <div class = "carrier" id = "projectSelector">
             <button id = "projectDefaultInbox">
                 <span class="material-icons-outlined mid">inbox</span>
                 <u>Inbox</u>
             </button>
-            <button id = "">
-                <span class="material-icons-outlined mid">circle</span>
-                <u>Lorem, ipsum.</u>
-            </button>
-            <button>
-                <span class="material-icons-outlined mid">circle</span>
-                <u>Lorem ipsum dolor sit amet.</u>
-            </button>
-            <button>
-                <span class="material-icons-outlined mid">circle</span>
-                <u>Lorem, ipsum.</u>
-            </button>
         </div>
         <div class = "labeler">
-            <div>
-                <button>
-                    <span class="material-icons-outlined mid">label</span>
-                    <u>Lorem, ipsum.</u>
-                </button>
-                <button>
-                    <span class="material-icons-outlined mid">label</span>
-                    <u>Lorem ipsum dolor sit amet.</u>
-                </button>
-                <button>
-                    <span class="material-icons-outlined mid">label</span>
-                    <u>Lorem ipsum dolor sit amet.</u>
-                </button>
+            <div id = "labelContainer">
             </div>
         </div>
         <div class = "prio-setter">
             <div>
-                <button>
+                <button id = "priorityOne">
                     <span class="material-icons-outlined mid">flag</span>
                     <u>Priority 1</u>
                 </button>
-                <button>
+                <button id = "priorityTwo">
                     <span class="material-icons-outlined mid">flag</span>
                     <u>Priority 2</u>
                 </button>
-                <button>
+                <button id = "priorityThree">
                     <span class="material-icons-outlined mid">flag</span>
                     <u>Priority 3</u>
                 </button>
@@ -309,18 +285,7 @@ const createHiddenModals = () => {
                         <span class="material-icons-outlined mid">done_all</span>
                     </button>
                 </nav>
-                <div class = "notif-output">
-                    <div class = "notif"> 
-                        <span id = "notif-title">Lorem, ipsum dolor. Lorem ipsum dolor sit amet. Lorem, ipsum dolor.</span>
-                        <div class = "notif-extra">
-                            <small>Task due</small>
-                            <div>
-                                <button>
-                                    <span class="material-icons-outlined mid">done</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div class = "notif-output" id = "notifOutput">
                 </div>
             </div>
         </div>
@@ -339,10 +304,10 @@ const createHiddenModals = () => {
         </div>
         <div class = "project-editor" id = "projectEditor">
             <div>
-                <strong>Project Name</strong>
+                <strong id = "projectName">Project Name</strong>
                 <div class = "project-editor-input">
-                    <label for="updateProjectName">Rename to</label>
-                    <input type = "text" id = "updateProjectName">
+                    <label for="updatedProjectName">Rename to</label>
+                    <input type = "text" id = "updatedProjectName">
                 </div>
                 <div class = "update-project-buttons">
                     <button id = "updateProjectBtn">Update</button>
@@ -366,10 +331,10 @@ const createHiddenModals = () => {
         </div>
         <div class = "label-editor" id = "labelEditor">
             <div>
-                <strong>label Name</strong>
+                <strong id = "editLabelName">label Name</strong>
                 <div class = "label-editor-input">
-                    <label for="updateLabelName">Rename to</label>
-                    <input type = "text" id = "updateLabelName">
+                    <label for="updatedLabelName">Rename to</label>
+                    <input type = "text" id = "updatedLabelName">
                 </div>
                 <div class = "update-label-buttons">
                     <button id = "updateLabelBtn">Update</button>
@@ -378,32 +343,32 @@ const createHiddenModals = () => {
                 </div>
             </div>
         </div>
-        <div class = "todo-editor" id = "todoEditor">
+        <div class = "todo-editor" id = "taskEditor">
             <div>
-                <strong>Edit Todo</strong>
+                <strong>Edit Task</strong>
                 <div class = "todo-editor-input">
-                    <label for="updatedName">Todo Name</label>
-                    <input type = "text" id = "updatedName">
-                    <label for="updatedNote">Todo Note</label>
-                    <input type = "text" id = "updatedNote">
-                    <label for="updatedSchedule">Schedule</label>
-                    <select id="updatedSchedule">
+                    <label for="updatedTaskName">Task Name</label>
+                    <input type = "text" id = "updatedTaskName">
+                    <label for="updatedTaskNote">Task Note</label>
+                    <input type = "text" id = "updatedTaskNote">
+                    <label for="updatedTaskSchedule">Schedule</label>
+                    <select id="updatedTaskSchedule">
                         <option value="today">Today</option>
                         <option value="tomorrow">Tomorrow</option>
                         <option value="next-week">Next Week</option>
                         <option value="custom">Custom</option>
                         <option value="no-date">No Date</option>
                     </select>
-                    <label for="updatedSelectedProject">Project</label>
-                    <select id="updatedSelectedProject">
+                    <label for="updatedTaskProject">Project</label>
+                    <select id="updatedTaskProject">
                         <option value="Inbox">Inbox</option>
                     </select>
-                    <label for="updatedLabel">Label</label>
-                    <select id="updatedLabel">
+                    <label for="updatedTaskLabel">Label</label>
+                    <select id="updatedTaskLabel">
                         <option value="none">None</option>
                     </select>
-                    <label for="updatedPriority">Priority</label>
-                    <select id="updatedPriority">
+                    <label for="updatedTaskPriority">Priority</label>
+                    <select id="updatedTaskPriority">
                         <option value="priority1">Priority 1</option>
                         <option value="priority2">Priority 2</option>
                         <option value="priority3">Priority 3</option>

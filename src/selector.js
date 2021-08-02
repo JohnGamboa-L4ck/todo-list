@@ -7,8 +7,12 @@ const hNav = (() => {
     const search = document.querySelector('#navInputSearch');
     const plus = document.querySelector('#navBtnQuickAdd');
     const notification = document.querySelector('#navBtnNotification');
+    const notifCount = document.querySelector('#navBtnNotificationCount');
 
-    return { menu, home, formSearch, search, plus, notification };
+    return { 
+        menu, home, 
+        formSearch, search, 
+        plus, notification, notifCount };
 })();
 
 const vNav = (() => {
@@ -73,8 +77,14 @@ const task = (() => {
     const schedCustomInput = document.querySelector('#schedulerCustomInput');
     const schedCustomBtn = document.querySelector('#schedulerCustomBtn');
     const schedNoDate = document.querySelector('#schedulerNoDateBtn');
+    const projectSelector = document.querySelector('#projectSelector');
+    const projectInbox = document.querySelector('#projectDefaultInbox');
+    const labelContainer = document.querySelector('#labelContainer');
+    const priorityOne = document.querySelector('#priorityOne');
+    const priorityTwo = document.querySelector('#priorityTwo');
+    const priorityThree = document.querySelector('#priorityThree');
+    const priorityFour = document.querySelector('#priorityDefault');
 
-    // projects
 
     return {
         input,
@@ -85,12 +95,61 @@ const task = (() => {
         schedTwm, spanTwm,
         schedNextWeek, spanNextWeek,
         schedCustomInput, schedCustomBtn,
-        schedNoDate
+        schedNoDate,
+        projectSelector, projectInbox,
+        labelContainer,
+        priorityOne, priorityTwo, priorityThree, priorityFour
     }
 })();
 
 const modal = (() => {
+    const quickAddTask = document.querySelector('#quickAddTodo');
+    const quickAddTaskInput = document.querySelector('#quickAddInput');
+    const quickAddTaskSubmit = document.querySelector('#quickAddSubmit');
+    const quickAddTaskCancel = document.querySelector('#quickAddCancel');
+    const notifReadAll = document.querySelector('#notifReadAllBtn');
+    const notifOutput = document.querySelector('notifOutput');
+    const projectCreator = document.querySelector('#projectCreator');
+    const projectAdd = document.querySelector('#projectAddButton');
+    const projectCancel = document.querySelector('#projectCancelButton');
+    const projectEditor = document.querySelector('#projectEditor');
+    const projectName = document.querySelector('#projectName');
+    const updatedProjectName = document.querySelector('#updatedProjectName');
+    const updateProject = document.querySelector('#updateProjectBtn');
+    const cancelProjectEditor = document.querySelector('#cancelProjectBtn');
+    const deleteProject = document.querySelector('#deleteProjectBtn');
+    const labelCreator = document.querySelector('#labelCreator');
+    const addLabelInput = document.querySelector('#addLabelInput');
+    const addNewLabel = document.querySelector('#addNewLabelBtn');
+    const cancelLabelCreator = document.querySelector('#cancelAddLabelBtn');
+    const labelEditor = document.querySelector('#labelEditor');
+    const editLabelName = document.querySelector('#editLabelName');
+    const updatedLabelName = document.querySelector('#updatedLabelName');
+    const updateLabel = document.querySelector('#updateLabelBtn');
+    const cancelLabelEditor = document.querySelector('#cancelUpdateBtn');
+    const deleteLabel = document.querySelector('#deleteLabelBtn');
+    const taskEditor = document.querySelector('#taskEditor');
+    const updatedTaskName = document.querySelector('#updatedTaskName');
+    const updatedTaskNote = document.querySelector('#updatedTaskNote');
+    const updatedTaskSched = document.querySelector('#updatedTaskSchedule');
+    const updatedTaskProject = document.querySelector('#updatedTaskProject');
+    const updatedTaskLabel = document.querySelector('#updatedTaskLabel');
+    const updatedTaskPriority = document.querySelector('#updatedTaskPriority');
+    const updateTask = document.querySelector('#updateTodo');
+    const cancelTaskEditor = document.querySelector('#cancelUpdateTodo');
 
+    return {
+        quickAddTask, quickAddTaskInput, quickAddTaskSubmit, quickAddTaskCancel,
+        notifReadAll, notifOutput,
+        projectCreator, newProjectName, projectAdd, projectCancel,
+        projectEditor, projectName, updatedProjectName, updateProject,
+            cancelProjectEditor, deleteProject,
+        labelCreator, addLabelInput, addNewLabel, cancelLabelCreator,
+        labelEditor, editLabelName, updatedLabelName, updateLabel,
+            cancelLabelEditor, deleteLabel,
+        taskEditor, updatedTaskName, updatedTaskNote, updatedTaskSched, updatedTaskProject,
+            updatedTaskLabel, updatedTaskPriority, updateTask, cancelTaskEditor
+    }
 })();
 
 export { 
