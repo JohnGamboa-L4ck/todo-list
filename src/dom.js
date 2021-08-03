@@ -142,6 +142,41 @@ const createContainer = () => {
             Add task
         </button>
     `;
+    // delete main innerHTML
+    main.innerHTML = `
+    <div class = "todo" tabindex="0">
+    <div>
+        <button class = "checkbox-btn prio4" tabindex="0"></button>
+        <!-- prio1 prio2 prio3 prio4 -->
+        <span draggable="false">&#x2714;</span>
+    </div>
+    <div class = "todo-text">
+        <label>Lorem ipsum dolor. Lorem ipsum dolor sit 
+            amet consectetur adipisic numquam! Aliquam, doloremque reprehenderit!
+        </label>
+        <div>
+            <small tabindex="0">Lorem.</small>
+        </div>
+        <p class = "todo-text-note">
+            <span class="material-icons-outlined mid tool-span">note</span>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, 
+            iure eos quaerat totam facere beatae!
+        </p>
+        <em class = "sched-upcom"><!-- sched-due, sched-today, sched-upcom -->
+            <span class="material-icons-outlined mid">event</span>
+            Saturday
+        </em>
+        <div class = "todo-tools-container">
+            <button id = "dummy">
+                <span class="material-icons-outlined mid tool-span">edit</span>
+            </button>
+            <button>
+                <span class="material-icons-outlined mid tool-span">delete</span>
+            </button>
+        </div>
+    </div>
+</div>
+    `;
 
     container.appendChild(header);
     container.appendChild(main);
@@ -269,7 +304,7 @@ const createMoreContainerItems = () => {
 const createHiddenModals = () => {
     document.querySelector('.app').innerHTML += `
         <div class = "quick-add-todo" id = "quickAddTodo">
-            <div>
+            <div id = "quickAddContainer">
                 <input type = "text" placeholder="Task name" id = "quickAddInput">
                 <div>
                     <button id = "quickAddSubmit">Add task</button>

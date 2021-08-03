@@ -20,13 +20,6 @@ const Todo = function( id, title, dueDate, note, priority, project, label, dueDa
 
 
 
-
-
-
-
-
-
-
 const test = (function(){
     const todo = Todo(
         1,

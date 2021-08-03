@@ -104,6 +104,7 @@ const task = (() => {
 
 const modal = (() => {
     const quickAddTask = document.querySelector('#quickAddTodo');
+    const quickAddContainer = document.querySelector('#quickAddContainer');
     const quickAddTaskInput = document.querySelector('#quickAddInput');
     const quickAddTaskSubmit = document.querySelector('#quickAddSubmit');
     const quickAddTaskCancel = document.querySelector('#quickAddCancel');
@@ -139,7 +140,7 @@ const modal = (() => {
     const cancelTaskEditor = document.querySelector('#cancelUpdateTodo');
 
     return {
-        quickAddTask, quickAddTaskInput, quickAddTaskSubmit, quickAddTaskCancel,
+        quickAddTask, quickAddContainer, quickAddTaskInput, quickAddTaskSubmit, quickAddTaskCancel,
         notifReadAll, notifOutput,
         projectCreator, newProjectName, projectAdd, projectCancel,
         projectEditor, projectName, updatedProjectName, updateProject,
