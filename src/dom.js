@@ -116,7 +116,7 @@ const createSidebarNav = () => {
                 <span class="material-icons-outlined mid">add</span>
             </button>
             <strong>Labels</strong>
-            <div class = "show" id = "labelListContainer">
+            <div id = "labelListContainer">
             </div>
         </div>
     `;
