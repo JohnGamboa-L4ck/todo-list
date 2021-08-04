@@ -26,17 +26,19 @@ const vNav = (() => {
     const projects = document.querySelector('#sbnavProjectsDiv');
     const projectChevron = document.querySelector('#sbnavProjectsDiv > span');
     const addProject = document.querySelector('#sbnavProjectAddBtn');
+    const projectListContainer = document.querySelector('#projectListContainer');
     const labels = document.querySelector('#sbnavLabelsDiv');
     const labelChevron = document.querySelector('#sbnavLabelsDiv > span');
     const addLabel = document.querySelector('#sbnavLabelAddBtn');
+    const labelListContainer = document.querySelector('#labelListContainer');
 
     return { 
         nav,
         inbox, inboxCounter,
         today, todayCounter,
         upcoming, upcomingCounter,
-        projects, projectChevron, addProject,
-        labels, labelChevron, addLabel
+        projects, projectChevron, addProject, projectListContainer,
+        labels, labelChevron, addLabel, labelListContainer
     };
 })();
 
@@ -108,11 +110,14 @@ const modal = (() => {
     const quickAddTaskInput = document.querySelector('#quickAddInput');
     const quickAddTaskSubmit = document.querySelector('#quickAddSubmit');
     const quickAddTaskCancel = document.querySelector('#quickAddCancel');
+    const notification = document.querySelector('#notifications');
+    const notifContainer = document.querySelector('#notifContainer');
     const notifReadAll = document.querySelector('#notifReadAllBtn');
     const notifOutput = document.querySelector('notifOutput');
     const projectCreator = document.querySelector('#projectCreator');
+    const newProjectName = document.querySelector('#newProjectName');
     const projectAdd = document.querySelector('#projectAddButton');
-    const projectCancel = document.querySelector('#projectCancelButton');
+    const cancelProjectCreator = document.querySelector('#projectCancelButton');
     const projectEditor = document.querySelector('#projectEditor');
     const projectName = document.querySelector('#projectName');
     const updatedProjectName = document.querySelector('#updatedProjectName');
@@ -141,8 +146,8 @@ const modal = (() => {
 
     return {
         quickAddTask, quickAddContainer, quickAddTaskInput, quickAddTaskSubmit, quickAddTaskCancel,
-        notifReadAll, notifOutput,
-        projectCreator, newProjectName, projectAdd, projectCancel,
+        notification, notifContainer, notifReadAll, notifOutput,
+        projectCreator, newProjectName, projectAdd, cancelProjectCreator,
         projectEditor, projectName, updatedProjectName, updateProject,
             cancelProjectEditor, deleteProject,
         labelCreator, addLabelInput, addNewLabel, cancelLabelCreator,

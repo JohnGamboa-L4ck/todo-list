@@ -313,7 +313,7 @@ const createHiddenModals = () => {
             </div>
         </div>
         <div class = "notifications" id = "notifications">
-            <div class = "notif-container">
+            <div class = "notif-container" id = "notifContainer">
                 <nav>
                     <strong>Notifications</strong>
                     <button class = "read-all-btn" id = "notifReadAllBtn">
