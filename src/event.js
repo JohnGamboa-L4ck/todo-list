@@ -122,12 +122,33 @@ const toggle = (() => {
         }
     };
 
+    const taskCreator = () => {
+        container.div.classList.toggle('add-triggered');
+        if(container.div.classList.contains('add-triggered')){
+            task.input.value = '';
+        }
+    };
+
+    const _itemManager = (newClass) => {
+        task.addDiv.classList.toggle(newClass);
+        if(task.addDiv.classList.contains('add-task-div') 
+        && task.addDiv.classList.contains(newClass)){
+            task.addDiv.className = `add-task-div ${newClass}`;
+        }
+    };
+
+    const taskScheduler = () => _itemManager('display-scheduler');
+    const taskProjectSelector = () => _itemManager('display-carrier');
+    const taskLabeler = () => _itemManager('display-labeler');
+    const taskPrioritySetter = () => _itemManager('display-prio-setter');
+
     return {
         menu,
         quickAddTask,
         notification,
         projects, addProject,
-        labels, addLabel
+        labels, addLabel,
+        taskCreator, taskScheduler, taskProjectSelector, taskLabeler, taskPrioritySetter
     };
 })();
 
@@ -150,7 +171,6 @@ const viewportListener = () => {
         ? vNav.nav.removeAttribute('style') : vNav.nav.classList.remove('show-nav');
 };
 
-
 const event = (() => {
     hNav.menu.addEventListener('click', toggle.menu);
 
@@ -170,12 +190,20 @@ const event = (() => {
     vNav.addLabel.addEventListener('click', toggle.addLabel);
     modal.cancelLabelCreator.addEventListener('click', toggle.addLabel);
 
+    container.addTaskBtn.addEventListener('click', toggle.taskCreator);
+    task.cancel.addEventListener('click', toggle.taskCreator);
+    task.schedule.addEventListener('click', toggle.taskScheduler);
+    task.project.addEventListener('click', toggle.taskProjectSelector);
+    task.label.addEventListener('click', toggle.taskLabeler);
+    task.priority.addEventListener('click', toggle.taskPrioritySetter);
+
     //delete dummy element and event below
     document.querySelector('#dummy').addEventListener('click', function(){
         if (vNav.nav.classList.contains('show-nav')) { return; }
-
-        console.log('shit')
+        console.log('shit');
     });
+
+    //fix data.js first before adding events in label, project, and todo editor
 
     window.onclick = mobileManager;
     window.onresize = viewportListener;

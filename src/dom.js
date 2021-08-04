@@ -108,6 +108,16 @@ const createSidebarNav = () => {
             </button>
             <strong>Projects</strong>
             <div id = "projectListContainer">
+                            <div tabindex="0">
+                                <div class = "bullet"></div>
+                                <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
+                                    adipisicing elit. Sunt perspiciatis, autem ipsum 
+                                    aliquid explicabo nulla?
+                                </span>
+                                <button>
+                                    <span class="material-icons-outlined mid">more_horiz</span>
+                                </button>
+                            </div>
             </div>
         </div>
         <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
@@ -117,6 +127,16 @@ const createSidebarNav = () => {
             </button>
             <strong>Labels</strong>
             <div id = "labelListContainer">
+                            <div tabindex="0">
+                                <span class="material-icons-outlined mid tag">label</span>
+                                <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
+                                    adipisicing elit. Sunt perspiciatis, autem ipsum 
+                                    aliquid explicabo nulla?
+                                </span>
+                                <button>
+                                    <span class="material-icons-outlined mid">more_horiz</span>
+                                </button>
+                            </div>
             </div>
         </div>
     `;
