@@ -1,4 +1,5 @@
 import chillingImg from './chilling.svg';
+import { embedLocalStorage, isEmptyToDoList } from './data.js';
 
 'use strict';
 
@@ -93,7 +94,7 @@ const createSidebarNav = () => {
             <span class="material-icons-outlined mid ic-span">inbox</span>
             Inbox<samp></samp>
         </button>
-        <button id = "sbnavTodayBtn">
+        <button id = "sbnavTodayBtn" class = "active">
             <span class="material-icons-outlined mid ic-span">calendar_today</span>
             Today<samp></samp>
         </button>
@@ -108,16 +109,6 @@ const createSidebarNav = () => {
             </button>
             <strong>Projects</strong>
             <div id = "projectListContainer">
-                            <div tabindex="0">
-                                <div class = "bullet"></div>
-                                <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
-                                    adipisicing elit. Sunt perspiciatis, autem ipsum 
-                                    aliquid explicabo nulla?
-                                </span>
-                                <button>
-                                    <span class="material-icons-outlined mid">more_horiz</span>
-                                </button>
-                            </div>
             </div>
         </div>
         <div class = "ic-div ic-label" tabindex="0" id = "sbnavLabelsDiv">
@@ -127,16 +118,6 @@ const createSidebarNav = () => {
             </button>
             <strong>Labels</strong>
             <div id = "labelListContainer">
-                            <div tabindex="0">
-                                <span class="material-icons-outlined mid tag">label</span>
-                                <span class = "unique">Lorem ipsum dolor sit amet consectetur, 
-                                    adipisicing elit. Sunt perspiciatis, autem ipsum 
-                                    aliquid explicabo nulla?
-                                </span>
-                                <button>
-                                    <span class="material-icons-outlined mid">more_horiz</span>
-                                </button>
-                            </div>
             </div>
         </div>
     `;
@@ -151,8 +132,13 @@ const createContainer = () => {
 
     container.setAttribute('class', 'container');
     container.setAttribute('id', 'container');
+
+    if(isEmptyToDoList()){//fix using dates since it defends on today's data
+        container.classList.add('empty');
+    }
+
     header.innerHTML = `
-        <h1 id = "header">Inbox</h1>
+        <h1 id = "header">Today</h1>
     `;
     div.setAttribute('class', 'add-task-btn-div');
     div.setAttribute('id', 'addTaskBtnDiv');
@@ -161,41 +147,6 @@ const createContainer = () => {
             <span class="material-icons-outlined mid tool-span">add</span>
             Add task
         </button>
-    `;
-    // delete main innerHTML
-    main.innerHTML = `
-    <div class = "todo" tabindex="0">
-    <div>
-        <button class = "checkbox-btn prio4" tabindex="0"></button>
-        <!-- prio1 prio2 prio3 prio4 -->
-        <span draggable="false">&#x2714;</span>
-    </div>
-    <div class = "todo-text">
-        <label>Lorem ipsum dolor. Lorem ipsum dolor sit 
-            amet consectetur adipisic numquam! Aliquam, doloremque reprehenderit!
-        </label>
-        <div>
-            <small tabindex="0">Lorem.</small>
-        </div>
-        <p class = "todo-text-note">
-            <span class="material-icons-outlined mid tool-span">note</span>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, 
-            iure eos quaerat totam facere beatae!
-        </p>
-        <em class = "sched-upcom"><!-- sched-due, sched-today, sched-upcom -->
-            <span class="material-icons-outlined mid">event</span>
-            Saturday
-        </em>
-        <div class = "todo-tools-container">
-            <button id = "dummy">
-                <span class="material-icons-outlined mid tool-span">edit</span>
-            </button>
-            <button>
-                <span class="material-icons-outlined mid tool-span">delete</span>
-            </button>
-        </div>
-    </div>
-</div>
     `;
 
     container.appendChild(header);

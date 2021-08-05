@@ -158,17 +158,53 @@ const clicker = (e) => {
     }
 };
 
-const mobileManager = (e) => {
+const viewManager = (e) => {
     if (vNav.nav.classList.contains('show-nav') && (window.innerWidth <= 750)){
         if(!vNav.nav.contains(document.activeElement)) { 
             vNav.nav.classList.toggle('show-nav'); 
         }
     }
+
+    if(task.addDiv.className != 'add-task-div'){
+        if(!task.addDiv.contains(document.activeElement)){
+            task.addDiv.className = 'add-task-div';
+        }
+    }
 };
+
+const display = (() => {
+
+    const _getLastWord = (string) => {
+        let word = string.split(" ");
+        return word[word.length - 1];
+    };
+
+    const todolist = (e) => {
+        container.header.innerText = _getLastWord(e.target.innerText);
+        document.querySelector('.info-comp .active').classList.remove('active');
+        e.target.classList.add('active');
+
+        if(window.innerWidth <= 750){
+            hNav.menu.click();
+        }
+        // insert the logic here, load the list of selected display
+    };
+
+    const home = () => {
+        container.header.innerText = 'Today';
+        document.querySelector('.info-comp .active').classList.remove('active');
+        vNav.today.classList.add('active');
+    };
+
+    return {
+        todolist,
+        home
+    };
+})();
 
 const viewportListener = () => {
     vNav.nav.hasAttribute('style')
-        ? vNav.nav.removeAttribute('style') : vNav.nav.classList.remove('show-nav');
+        ? vNav.nav.removeAttribute('style') : vNav.nav.classList.remove('display-nav');
 };
 
 const event = (() => {
@@ -197,16 +233,17 @@ const event = (() => {
     task.label.addEventListener('click', toggle.taskLabeler);
     task.priority.addEventListener('click', toggle.taskPrioritySetter);
 
-    //delete dummy element and event below
-    document.querySelector('#dummy').addEventListener('click', function(){
-        if (vNav.nav.classList.contains('show-nav')) { return; }
-        console.log('shit');
-    });
+    vNav.inbox.addEventListener('click', display.todolist);
+    vNav.today.addEventListener('click', display.todolist);
+    hNav.home.addEventListener('click', display.home);
+    vNav.upcoming.addEventListener('click', display.todolist);
 
     //fix data.js first before adding events in label, project, and todo editor
 
-    window.onclick = mobileManager;
+    window.onclick = viewManager;
     window.onresize = viewportListener;
+
+    //esc keyup that closes modals will be cool
 
 })();
 

@@ -2,11 +2,16 @@
 
 const embedLocalStorage = (() => {
     if(!localStorage.getItem('todos'))
-    localStorage.setItem('todos', JSON.stringify([]));
+    localStorage.setItem('todos', JSON.stringify({todolist: [], projects: [], labels: []}));
 })();
 
 const Todo = function( id, title, dueDate, note, priority, project, label, dueDateNotifSent ){
     return { id, title, dueDate, note, priority, project, label, dueDateNotifSent }
+};
+
+const isEmptyToDoList = () => {
+    let data = JSON.parse(localStorage.getItem('todos'));
+    return !data.todolist.length ? true : false;
 };
 
 //create container for projects
@@ -21,25 +26,22 @@ const Todo = function( id, title, dueDate, note, priority, project, label, dueDa
 
 
 const test = (function(){
-    const todo = Todo(
-        1,
-        'finish todo',
-        '2021-07-31',
-        '',
-        'priority 1',
-        'inbox',
-        '',
-        'none'
-    );
-
-    let array = JSON.parse(localStorage.getItem('todos'));
-
-    if(!array.length){
-        array.push(todo);
-        localStorage.setItem('todos', JSON.stringify(array));
-    }
-
-    console.log(todo)
+    // const todo = Todo(
+    //     1,
+    //     'finish todo',
+    //     '2021-07-31',
+    //     '',
+    //     'priority 1',
+    //     'inbox',
+    //     '',
+    //     'none'
+    // );
+    // let array = JSON.parse(localStorage.getItem('todos'));
+    // if(!array.length){
+    //     array.push(todo);
+    //     localStorage.setItem('todos', JSON.stringify(array));
+    // }
+    // console.log(todo)
 
     // let x = Date.now();
     // // let x = new Date().getTime();
@@ -54,4 +56,8 @@ const test = (function(){
 
 })();
 
-export { embedLocalStorage, test };
+export { 
+    embedLocalStorage,
+    isEmptyToDoList,
+    test 
+};

@@ -202,6 +202,10 @@ h1 {
     color: var(--purple);
 }
 
+.info-comp .active {
+    background-color: var(--malibu);
+}
+
 .opa {
     opacity: .5;
 }
@@ -560,6 +564,7 @@ button:focus-visible {
     border-radius: 3px;
     padding: 0 .5rem .5rem .5rem;
     height: 68.48px;
+    margin-top: 1rem;
 }
 
 .add-task-div > * {

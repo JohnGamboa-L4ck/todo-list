@@ -62,6 +62,7 @@ const container = (() => {
 })();
 
 const task = (() => {
+    const addDiv = document.querySelector('#addTaskDiv');
     const input = document.querySelector('#addTaskInput');
     const schedule = document.querySelector('#selectScheduleBtn');
     const project = document.querySelector('#selectProjectBtn');
@@ -69,7 +70,6 @@ const task = (() => {
     const priority = document.querySelector('#selectPriorityBtn');
     const add = document.querySelector('#addTaskMainBtn');
     const cancel = document.querySelector('#addTaskCancelBtn');
-    const addDiv = document.querySelector('#addTaskDiv');
 
     const schedToday = document.querySelector('#schedulerTodayBtn');
     const spanToday = document.querySelector('#schedulerTodaySpan');
@@ -93,7 +93,7 @@ const task = (() => {
         input,
         schedule, project,
         label, priority,
-        add, cancel, addDiv,
+        addDiv, add, cancel,
         schedToday, spanToday,
         schedTwm, spanTwm,
         schedNextWeek, spanNextWeek,
