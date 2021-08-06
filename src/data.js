@@ -14,6 +14,45 @@ const isEmptyToDoList = () => {
     return !data.todolist.length ? true : false;
 };
 
+const push = (() => {
+    let _data = JSON.parse(localStorage.getItem('todos'));
+
+    const _embed = () => {
+        localStorage.setItem('todos', JSON.stringify(_data));
+    };
+
+    const generateId = () => {
+        let id = _data.todolist.length + 1;
+
+        if(_data.todolist.length){
+            let counter = 0;
+            _data.todolist.forEach(() => {
+                if(_data.todolist[counter].id == id) { id++; }
+            });
+        }
+        return id;
+    };
+
+    const quick = (value) => {
+        const todo = Todo(
+            generateId(),
+            value,
+            '',
+            '',
+            'priority 4',
+            'inbox',
+            '',
+            'none'
+        );
+        _data.todolist.push(todo);
+        _embed();
+    };
+
+    return {
+        quick
+    }
+})();
+
 //create container for projects
 //container for labels
 
@@ -59,5 +98,6 @@ const test = (function(){
 export { 
     embedLocalStorage,
     isEmptyToDoList,
-    test 
+    test,
+    push
 };

@@ -1,4 +1,5 @@
 import { hNav, vNav, container, task, modal } from './selector.js';
+import { push } from './data.js';
 
 'use strict';
 
@@ -202,6 +203,22 @@ const display = (() => {
     };
 })();
 
+const add = (() => {
+    const quick = () => {
+        if(!modal.quickAddTaskInput.value){
+            alert('Task name required!')
+            return;
+        }
+        push.quick(modal.quickAddTaskInput.value);
+        toggle.quickAddTask();
+        setTimeout(()=> alert('Added to Inbox!'), 500);
+    };
+
+    return {
+        quick
+    };
+})();
+
 const viewportListener = () => {
     vNav.nav.hasAttribute('style')
         ? vNav.nav.removeAttribute('style') : vNav.nav.classList.remove('display-nav');
@@ -237,6 +254,8 @@ const event = (() => {
     vNav.today.addEventListener('click', display.todolist);
     hNav.home.addEventListener('click', display.home);
     vNav.upcoming.addEventListener('click', display.todolist);
+
+    modal.quickAddTaskSubmit.addEventListener('click', add.quick);
 
     //fix data.js first before adding events in label, project, and todo editor
 
