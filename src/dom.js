@@ -121,7 +121,44 @@ const createSidebarNav = () => {
             </div>
         </div>
     `;
+
     document.querySelector('.wrapper').appendChild(nav);
+
+    let data = JSON.parse(localStorage.getItem('todos'));
+    let counter = 0;
+
+    if (data.projects.length){
+        data.projects.forEach(()=> {
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <div class = "bullet"></div>
+                    <span class = "unique">${data.projects[counter]}</span>
+                <button>
+                    <span class="material-icons-outlined mid">more_horiz</span>
+                </button>
+            `;
+            div.setAttribute('tabindex', '0');
+            document.querySelector('#projectListContainer').appendChild(div);  
+            counter++; 
+        });
+    }
+    
+    if (data.labels.length){
+        counter = 0;
+        data.labels.forEach(()=> {
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <span class="material-icons-outlined mid tag">label</span>
+                    <span class = "unique">${data.labels[counter]}</span>
+                <button>
+                    <span class="material-icons-outlined mid">more_horiz</span>
+                </button>
+            `;
+            div.setAttribute('tabindex', '0');
+            document.querySelector('#labelListContainer').appendChild(div);   
+            counter++; 
+        });
+    }
 };
 
 const createContainer = () => {

@@ -191,6 +191,11 @@ const display = (() => {
         // insert the logic here, load the list of selected display
     };
 
+    const projectList = () => {
+        let _data = JSON.parse(localStorage.getItem('todos'));
+        // resume
+    };
+
     const home = () => {
         container.header.innerText = 'Today';
         document.querySelector('.info-comp .active').classList.remove('active');
@@ -199,6 +204,7 @@ const display = (() => {
 
     return {
         todolist,
+        projectList,
         home
     };
 })();
@@ -214,8 +220,30 @@ const add = (() => {
         setTimeout(()=> alert('Added to Inbox!'), 500);
     };
 
+    const project = () => {
+        if(!modal.newProjectName.value){
+            alert('Project name required!')
+            return;
+        }
+        push.project(modal.newProjectName.value);
+        modal.projectCreator.classList.toggle('on');
+        setTimeout(()=> alert('Added to Projects!'), 500);
+    };
+
+    const label = () => {
+        if(!modal.addLabelInput.value){
+            alert('Label name required!')
+            return;
+        }
+        push.label(modal.addLabelInput.value);
+        modal.labelCreator.classList.toggle('on');
+        setTimeout(()=> alert('Added to Labels!'), 500);
+    };
+
     return {
-        quick
+        quick,
+        project,
+        label
     };
 })();
 
@@ -256,6 +284,8 @@ const event = (() => {
     vNav.upcoming.addEventListener('click', display.todolist);
 
     modal.quickAddTaskSubmit.addEventListener('click', add.quick);
+    modal.projectAdd.addEventListener('click', add.project);
+    modal.addNewLabel.addEventListener('click', add.label);
 
     //fix data.js first before adding events in label, project, and todo editor
 

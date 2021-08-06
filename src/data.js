@@ -34,7 +34,7 @@ const push = (() => {
     };
 
     const quick = (value) => {
-        const todo = Todo(
+        let todo = Todo(
             generateId(),
             value,
             '',
@@ -48,8 +48,20 @@ const push = (() => {
         _embed();
     };
 
+    const project = (value) => {
+        _data.projects.push(value)
+        _embed();
+    };
+
+    const label = (value) => {
+        _data.labels.push(value)
+        _embed();
+    };
+
     return {
-        quick
+        quick,
+        project,
+        label
     }
 })();
 
