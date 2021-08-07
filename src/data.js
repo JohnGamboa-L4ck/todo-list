@@ -65,15 +65,46 @@ const push = (() => {
     }
 })();
 
-//create container for projects
-//container for labels
+const dateString = (() => {
+    let dateNow;
+    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
+        'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    const today = () => {
+        dateNow = new Date();
+        dateNow.setHours(0,0,0,0);
+        return dateNow;
+    };
 
+    const todayName = () => days[today().getDay()];
 
+    const tomorrow = () => {
+        dateNow = new Date();
+        dateNow.setDate(dateNow.getDate() + 1)
+        dateNow.setHours(0,0,0,0);
+        return dateNow;
+    };
 
+    const tomorrowName = () => days[tomorrow().getDay()];
 
+    const nextWeek = () => {
+        dateNow = new Date();
+        dateNow.setDate(dateNow.getDate() + 7)
+        dateNow.setHours(0,0,0,0);
+        return dateNow;
+    };
 
+    const nextWeekName = () => {
+        return `${days[nextWeek().getDay()]} ${nextWeek().getDate()} ${months[nextWeek().getMonth()]}`;
+    };
 
+    return {
+        today, todayName,
+        tomorrow, tomorrowName,
+        nextWeek, nextWeekName
+    };
+})();
 
 
 const test = (function(){
@@ -94,22 +125,39 @@ const test = (function(){
     // }
     // console.log(todo)
 
-    // let x = Date.now();
-    // // let x = new Date().getTime();
-    // // Date.parse(x)
-    // let as = todo.dueDate;
-    // console.log(Date.parse(as))
-
     // var dateControl = document.querySelector('input[type="date"]');
     // dateControl.value = '2017-06-01';
     // console.log(dateControl.value); // prints "2017-06-01"
     // console.log(dateControl.valueAsNumber); // prints 1496275200000, a JavaScript timestamp (ms)
 
+    const datax = '2021-08-7';
+    console.log(datax);
+    console.log(Date.parse(datax))
+    // console.log(datax.valueAsNumber)
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    console.log('today', today);
+    console.log('today number', Date.parse(today));
+
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(0,0,0,0);
+    console.log(tomorrow);
+    console.log(Date.parse(tomorrow))
+
+    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let d = new Date(); //or dateString
+    let dayName = days[d.getDay()];
+    console.log(dayName)
+
+    console.log(dateString.today());
 })();
 
 export { 
     embedLocalStorage,
     isEmptyToDoList,
     test,
-    push
+    push,
+    dateString
 };

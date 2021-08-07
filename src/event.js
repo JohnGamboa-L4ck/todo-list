@@ -191,11 +191,6 @@ const display = (() => {
         // insert the logic here, load the list of selected display
     };
 
-    const projectList = () => {
-        let _data = JSON.parse(localStorage.getItem('todos'));
-        // resume
-    };
-
     const home = () => {
         container.header.innerText = 'Today';
         document.querySelector('.info-comp .active').classList.remove('active');
@@ -204,8 +199,63 @@ const display = (() => {
 
     return {
         todolist,
-        projectList,
         home
+    };
+})();
+
+const refresh = (() => {
+    let data;
+    let counter;
+
+    const projectList = () => {
+        data = JSON.parse(localStorage.getItem('todos'));
+
+        if (data.projects.length){
+            counter = 0;
+            document.querySelector('#projectListContainer').innerHTML = '';
+
+            data.projects.forEach(()=> {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <div class = "bullet"></div>
+                        <span class = "unique">${data.projects[counter]}</span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                `;
+                div.setAttribute('tabindex', '0');
+                document.querySelector('#projectListContainer').appendChild(div);  
+                counter++; 
+            });
+        }
+    };
+
+    const labelList = () => {
+        data = JSON.parse(localStorage.getItem('todos'));
+
+        if (data.labels.length){
+            counter = 0;
+            document.querySelector('#labelListContainer').innerHTML = '';
+
+            data.labels.forEach(()=> {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <span class="material-icons-outlined mid tag">label</span>
+                        <span class = "unique">${data.labels[counter]}</span>
+                    <button>
+                        <span class="material-icons-outlined mid">more_horiz</span>
+                    </button>
+                `;
+                div.setAttribute('tabindex', '0');
+                document.querySelector('#labelListContainer').appendChild(div);   
+                counter++; 
+            });
+        }
+    };
+
+    return {
+        projectList,
+        labelList
     };
 })();
 
@@ -228,6 +278,7 @@ const add = (() => {
         push.project(modal.newProjectName.value);
         modal.projectCreator.classList.toggle('on');
         setTimeout(()=> alert('Added to Projects!'), 500);
+        refresh.projectList();
     };
 
     const label = () => {
@@ -238,12 +289,22 @@ const add = (() => {
         push.label(modal.addLabelInput.value);
         modal.labelCreator.classList.toggle('on');
         setTimeout(()=> alert('Added to Labels!'), 500);
+        refresh.labelList();
+    };
+
+    const todo = function() {
+        if(!task.input.value){
+            alert('Task name required!')
+            return;
+        }
+        //fix item selection first before fixing this
     };
 
     return {
         quick,
         project,
-        label
+        label,
+        todo
     };
 })();
 
@@ -286,6 +347,8 @@ const event = (() => {
     modal.quickAddTaskSubmit.addEventListener('click', add.quick);
     modal.projectAdd.addEventListener('click', add.project);
     modal.addNewLabel.addEventListener('click', add.label);
+
+    task.add.addEventListener('click', add.todo);
 
     //fix data.js first before adding events in label, project, and todo editor
 

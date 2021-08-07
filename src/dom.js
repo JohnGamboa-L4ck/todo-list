@@ -1,5 +1,5 @@
 import chillingImg from './chilling.svg';
-import { embedLocalStorage, isEmptyToDoList } from './data.js';
+import { embedLocalStorage, isEmptyToDoList, dateString } from './data.js';
 
 'use strict';
 
@@ -220,15 +220,15 @@ const createAddTaskDiv = () => {
         <div class = "scheduler">
             <button class = "sched" id = "schedulerTodayBtn">
                 <span>Today</span>
-                <span id = "schedulerTodaySpan">today's date</span>
+                <span id = "schedulerTodaySpan">${dateString.todayName()}</span>
             </button>
             <button class = "sched" id = "schedulerTwmBtn">
                 <span>Tomorrow</span>
-                <span id = "schedulerTwmBtn">Tue</span>
+                <span id = "schedulerTwmBtn">${dateString.tomorrowName()}</span>
             </button>
             <button class = "sched" id = "schedulerNextWeekBtn">
                 <span>Next week</span>
-                <span id = "schedulerNextWeekSpan">Mon 26 July</span>
+                <span id = "schedulerNextWeekSpan">${dateString.nextWeekName()}</span>
             </button>
             <div class = "sched-custom">
                 <input type = "date" id = "schedulerCustomInput">
