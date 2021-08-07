@@ -70,6 +70,15 @@ const dateString = (() => {
     let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
         'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    const getString = (target) => {
+        let date = target().getDate().toString();
+        if(date.length == 2){
+            return `${target().getFullYear()}-${target().getDate()}-${target().getMonth()+1}`;
+        } else {
+            return `${target().getFullYear()}-0${target().getDate()}-${target().getMonth()+1}`;
+        }
+    };
 
     const today = () => {
         dateNow = new Date();
@@ -77,15 +86,7 @@ const dateString = (() => {
         return dateNow;
     };
 
-    const todayString = () => {
-        let date = today().getDate().toString();
-        if(date.length == 2){
-            return `${today().getFullYear()}-${today().getDate()}-${today().getMonth()+1}`;
-        } else {
-            return `${today().getFullYear()}-0${today().getDate()}-${today().getMonth()+1}`;
-        }
-    };
-
+    const todayString = () => getString(today);
     const todayName = () => days[today().getDay()];
 
     const tomorrow = () => {
@@ -95,15 +96,7 @@ const dateString = (() => {
         return dateNow;
     };
 
-    const twmString = () => {
-        let date = tomorrow().getDate().toString();
-        if(date.length == 2){
-            return `${tomorrow().getFullYear()}-${tomorrow().getDate()}-${tomorrow().getMonth()+1}`;
-        } else {
-            return `${tomorrow().getFullYear()}-0${tomorrow().getDate()}-${tomorrow().getMonth()+1}`;
-        }
-    };
-
+    const twmString = () => getString(tomorrow);
     const tomorrowName = () => days[tomorrow().getDay()];
 
     const nextWeek = () => {
@@ -113,14 +106,7 @@ const dateString = (() => {
         return dateNow;
     };
 
-    const nextWeekString = () => {
-        let date = nextWeek().getDate().toString();
-        if(date.length == 2){
-            return `${nextWeek().getFullYear()}-${nextWeek().getDate()}-${nextWeek().getMonth()+1}`;
-        } else {
-            return `${nextWeek().getFullYear()}-0${nextWeek().getDate()}-${nextWeek().getMonth()+1}`;
-        }
-    };
+    const nextWeekString = () => getString(nextWeek);
 
     const nextWeekName = () => {
         return `${days[nextWeek().getDay()]} ${nextWeek().getDate()} ${months[nextWeek().getMonth()]}`;
