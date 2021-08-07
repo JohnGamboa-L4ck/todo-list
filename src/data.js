@@ -77,6 +77,15 @@ const dateString = (() => {
         return dateNow;
     };
 
+    const todayString = () => {
+        let date = today().getDate().toString();
+        if(date.length == 2){
+            return `${today().getFullYear()}-${today().getDate()}-${today().getMonth()+1}`;
+        } else {
+            return `${today().getFullYear()}-0${today().getDate()}-${today().getMonth()+1}`;
+        }
+    };
+
     const todayName = () => days[today().getDay()];
 
     const tomorrow = () => {
@@ -84,6 +93,15 @@ const dateString = (() => {
         dateNow.setDate(dateNow.getDate() + 1)
         dateNow.setHours(0,0,0,0);
         return dateNow;
+    };
+
+    const twmString = () => {
+        let date = tomorrow().getDate().toString();
+        if(date.length == 2){
+            return `${tomorrow().getFullYear()}-${tomorrow().getDate()}-${tomorrow().getMonth()+1}`;
+        } else {
+            return `${tomorrow().getFullYear()}-0${tomorrow().getDate()}-${tomorrow().getMonth()+1}`;
+        }
     };
 
     const tomorrowName = () => days[tomorrow().getDay()];
@@ -95,6 +113,15 @@ const dateString = (() => {
         return dateNow;
     };
 
+    const nextWeekString = () => {
+        let date = nextWeek().getDate().toString();
+        if(date.length == 2){
+            return `${nextWeek().getFullYear()}-${nextWeek().getDate()}-${nextWeek().getMonth()+1}`;
+        } else {
+            return `${nextWeek().getFullYear()}-0${nextWeek().getDate()}-${nextWeek().getMonth()+1}`;
+        }
+    };
+
     const nextWeekName = () => {
         return `${days[nextWeek().getDay()]} ${nextWeek().getDate()} ${months[nextWeek().getMonth()]}`;
     };
@@ -102,12 +129,15 @@ const dateString = (() => {
     return {
         today, todayName,
         tomorrow, tomorrowName,
-        nextWeek, nextWeekName
+        nextWeek, nextWeekName,
+        todayString, twmString, nextWeekString
     };
 })();
 
 
 const test = (function(){
+    console.log(dateString.nextWeekString())
+    console.log(Date.parse(dateString.todayString()))
     // const todo = Todo(
     //     1,
     //     'finish todo',
@@ -130,7 +160,7 @@ const test = (function(){
     // console.log(dateControl.value); // prints "2017-06-01"
     // console.log(dateControl.valueAsNumber); // prints 1496275200000, a JavaScript timestamp (ms)
 
-    const datax = '2021-08-7';
+    const datax = '2021-08-8';
     console.log(datax);
     console.log(Date.parse(datax))
     // console.log(datax.valueAsNumber)
@@ -151,7 +181,7 @@ const test = (function(){
     let dayName = days[d.getDay()];
     console.log(dayName)
 
-    console.log(dateString.today());
+    console.log(dateString.nextWeek());
 })();
 
 export { 

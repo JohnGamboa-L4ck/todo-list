@@ -1,5 +1,5 @@
 import { hNav, vNav, container, task, modal } from './selector.js';
-import { push } from './data.js';
+import { push, dateString } from './data.js';
 
 'use strict';
 
@@ -125,7 +125,7 @@ const toggle = (() => {
 
     const taskCreator = () => {
         container.div.classList.toggle('add-triggered');
-        if(container.div.classList.contains('add-triggered')){
+        if (container.div.classList.contains('add-triggered')){
             task.input.value = '';
         }
     };
@@ -138,9 +138,27 @@ const toggle = (() => {
         }
     };
 
-    const taskScheduler = () => _itemManager('display-scheduler');
-    const taskProjectSelector = () => _itemManager('display-carrier');
-    const taskLabeler = () => _itemManager('display-labeler');
+    const taskScheduler = () => {
+        _itemManager('display-scheduler');
+        if (task.addDiv.classList.contains('display-scheduler')) {
+            refresh.schedule();
+        }
+    };
+
+    const taskProjectSelector = () => {
+        _itemManager('display-carrier');
+        if (task.addDiv.classList.contains('display-carrier')){
+            display.taskProjectList();
+        }
+    };
+
+    const taskLabeler = () => {
+        _itemManager('display-labeler');
+        if (task.addDiv.classList.contains('display-labeler')){
+            display.taskLabelList();
+        }
+    };
+
     const taskPrioritySetter = () => _itemManager('display-prio-setter');
 
     return {
@@ -197,35 +215,76 @@ const display = (() => {
         vNav.today.classList.add('active');
     };
 
+    const taskProjectList = () => {
+        task.projectSelector.innerHTML = '';
+        task.projectSelector.innerHTML = `
+            <button id = "projectDefaultInbox">
+                <span class="material-icons-outlined mid">inbox</span>
+                <u>Inbox</u>
+            </button>
+        `;
+
+        let data = JSON.parse(localStorage.getItem('todos'));
+
+        data.projects.forEach((project) => {
+            const button = document.createElement('button');
+            button.innerHTML = `
+                <span class="material-icons-outlined mid">circle</span>
+                <u>${project}</u>
+            `;
+            task.projectSelector.appendChild(button);
+        });
+    };
+
+    const taskLabelList = () => {
+        task.labelContainer.innerHTML = '';
+        task.labelContainer.innerHTML = `
+            <button>
+                <span class="material-icons-outlined mid">label</span>
+                <u>Lorem, ipsum.</u>
+            </button>
+        `;
+
+        let data = JSON.parse(localStorage.getItem('todos'));
+
+        data.labels.forEach((label) => {
+            const button = document.createElement('button');
+            button.innerHTML = `
+                <span class="material-icons-outlined mid">label</span>
+                <u>${label}</u>
+            `;
+            task.labelContainer.appendChild(button);
+        });
+    };
+
     return {
         todolist,
-        home
+        home,
+        taskProjectList,
+        taskLabelList
     };
 })();
 
 const refresh = (() => {
     let data;
-    let counter;
 
     const projectList = () => {
         data = JSON.parse(localStorage.getItem('todos'));
 
         if (data.projects.length){
-            counter = 0;
             document.querySelector('#projectListContainer').innerHTML = '';
 
-            data.projects.forEach(()=> {
+            data.projects.forEach((project)=> {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <div class = "bullet"></div>
-                        <span class = "unique">${data.projects[counter]}</span>
+                        <span class = "unique">${project}</span>
                     <button>
                         <span class="material-icons-outlined mid">more_horiz</span>
                     </button>
                 `;
                 div.setAttribute('tabindex', '0');
                 document.querySelector('#projectListContainer').appendChild(div);  
-                counter++; 
             });
         }
     };
@@ -234,28 +293,33 @@ const refresh = (() => {
         data = JSON.parse(localStorage.getItem('todos'));
 
         if (data.labels.length){
-            counter = 0;
             document.querySelector('#labelListContainer').innerHTML = '';
 
-            data.labels.forEach(()=> {
+            data.labels.forEach((label)=> {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <span class="material-icons-outlined mid tag">label</span>
-                        <span class = "unique">${data.labels[counter]}</span>
+                        <span class = "unique">${label}</span>
                     <button>
                         <span class="material-icons-outlined mid">more_horiz</span>
                     </button>
                 `;
                 div.setAttribute('tabindex', '0');
                 document.querySelector('#labelListContainer').appendChild(div);   
-                counter++; 
             });
         }
     };
 
+    const schedule = () => {
+        task.spanToday.innerText = dateString.todayName();
+        task.spanTwm.innerText = dateString.tomorrowName();
+        task.spanNextWeek.innerText = dateString.nextWeekName();
+    };
+
     return {
         projectList,
-        labelList
+        labelList,
+        schedule
     };
 })();
 
@@ -349,6 +413,7 @@ const event = (() => {
     modal.addNewLabel.addEventListener('click', add.label);
 
     task.add.addEventListener('click', add.todo);
+
 
     //fix data.js first before adding events in label, project, and todo editor
 

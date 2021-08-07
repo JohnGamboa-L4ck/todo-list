@@ -1,5 +1,5 @@
 import chillingImg from './chilling.svg';
-import { embedLocalStorage, isEmptyToDoList, dateString } from './data.js';
+import { embedLocalStorage, isEmptyToDoList } from './data.js';
 
 'use strict';
 
@@ -125,38 +125,34 @@ const createSidebarNav = () => {
     document.querySelector('.wrapper').appendChild(nav);
 
     let data = JSON.parse(localStorage.getItem('todos'));
-    let counter = 0;
 
     if (data.projects.length){
-        data.projects.forEach(()=> {
+        data.projects.forEach((project) => {
             const div = document.createElement('div');
             div.innerHTML = `
                 <div class = "bullet"></div>
-                    <span class = "unique">${data.projects[counter]}</span>
+                    <span class = "unique">${project}</span>
                 <button>
                     <span class="material-icons-outlined mid">more_horiz</span>
                 </button>
             `;
             div.setAttribute('tabindex', '0');
             document.querySelector('#projectListContainer').appendChild(div);  
-            counter++; 
         });
     }
     
     if (data.labels.length){
-        counter = 0;
-        data.labels.forEach(()=> {
+        data.labels.forEach((label)=> {
             const div = document.createElement('div');
             div.innerHTML = `
                 <span class="material-icons-outlined mid tag">label</span>
-                    <span class = "unique">${data.labels[counter]}</span>
+                    <span class = "unique">${label}</span>
                 <button>
                     <span class="material-icons-outlined mid">more_horiz</span>
                 </button>
             `;
             div.setAttribute('tabindex', '0');
             document.querySelector('#labelListContainer').appendChild(div);   
-            counter++; 
         });
     }
 };
@@ -220,15 +216,15 @@ const createAddTaskDiv = () => {
         <div class = "scheduler">
             <button class = "sched" id = "schedulerTodayBtn">
                 <span>Today</span>
-                <span id = "schedulerTodaySpan">${dateString.todayName()}</span>
+                <span id = "schedulerTodaySpan"></span>
             </button>
             <button class = "sched" id = "schedulerTwmBtn">
                 <span>Tomorrow</span>
-                <span id = "schedulerTwmBtn">${dateString.tomorrowName()}</span>
+                <span id = "schedulerTwmSpan"></span>
             </button>
             <button class = "sched" id = "schedulerNextWeekBtn">
                 <span>Next week</span>
-                <span id = "schedulerNextWeekSpan">${dateString.nextWeekName()}</span>
+                <span id = "schedulerNextWeekSpan"></span>
             </button>
             <div class = "sched-custom">
                 <input type = "date" id = "schedulerCustomInput">
