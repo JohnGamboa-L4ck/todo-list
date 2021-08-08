@@ -474,8 +474,19 @@ const select = (() => {
         if(!task.schedCustomInput.value){
             alert('Date required!')
         } else {
-            task.schedule.innerText = task.schedCustomInput.value;
-            task.schedule.dataset.value = task.schedCustomInput.value;
+            let newDate = new Date(task.schedCustomInput.value);
+            newDate.setHours(0,0,0,0);
+
+            let date = newDate.getDate().toString();
+
+            if(date.length == 2){
+                newDate = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`;
+            } else {
+                newDate = `${newDate.getFullYear()}-${newDate.getMonth()+1}-0${newDate.getDate()}`;
+            }
+
+            task.schedule.innerText = newDate;
+            task.schedule.dataset.value = newDate;
             toggle.taskScheduler();
         }
     };

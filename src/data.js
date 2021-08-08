@@ -92,9 +92,9 @@ const dateString = (() => {
     const getString = (target) => {
         let date = target().getDate().toString();
         if(date.length == 2){
-            return `${target().getFullYear()}-${target().getDate()}-${target().getMonth()+1}`;
+            return `${target().getFullYear()}-${target().getMonth()+1}-${target().getDate()}`;
         } else {
-            return `${target().getFullYear()}-0${target().getDate()}-${target().getMonth()+1}`;
+            return `${target().getFullYear()}-${target().getMonth()+1}-0${target().getDate()}`;
         }
     };
 
@@ -140,8 +140,8 @@ const dateString = (() => {
 
 
 const test = (function(){
-    console.log(dateString.todayString())
-    console.log(Date.parse(dateString.todayString()))
+    // console.log(dateString.todayString())
+    // console.log(Date.parse(dateString.todayString()))
     // const todo = Todo(
     //     1,
     //     'finish todo',
@@ -164,28 +164,28 @@ const test = (function(){
     // console.log(dateControl.value); // prints "2017-06-01"
     // console.log(dateControl.valueAsNumber); // prints 1496275200000, a JavaScript timestamp (ms)
 
-    const datax = '2021-08-8';
-    console.log(datax);
-    console.log(Date.parse(datax))
-    // console.log(datax.valueAsNumber)
+    // const datax = '2021-08-8';
+    // console.log(datax);
+    // console.log(Date.parse(datax))
+    // // console.log(datax.valueAsNumber)
 
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    console.log('today', today);
-    console.log('today number', Date.parse(today));
+    // const today = new Date();
+    // today.setHours(0,0,0,0);
+    // console.log('today', today);
+    // console.log('today number', Date.parse(today));
 
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    tomorrow.setHours(0,0,0,0);
-    console.log(tomorrow);
-    console.log(Date.parse(tomorrow))
+    // const tomorrow = new Date()
+    // tomorrow.setDate(tomorrow.getDate() + 1)
+    // tomorrow.setHours(0,0,0,0);
+    // console.log(tomorrow);
+    // console.log(Date.parse(tomorrow))
 
-    let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    let d = new Date(); //or dateString
-    let dayName = days[d.getDay()];
-    console.log(dayName)
+    // let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    // let d = new Date(); //or dateString
+    // let dayName = days[d.getDay()];
+    // console.log(dayName)
 
-    console.log(dateString.nextWeek());
+    // console.log(dateString.nextWeek());
 })();
 
 export { 

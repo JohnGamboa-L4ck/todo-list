@@ -186,6 +186,21 @@ const createContainer = () => {
     container.appendChild(main);
     container.appendChild(div);
     document.querySelector('.wrapper').appendChild(container);
+  
+    let today = new Date();
+    today.setHours(0,0,0,0);
+    today = Date.parse(today);
+    console.log('test', today);
+
+    let data = JSON.parse(localStorage.getItem('todos'));
+
+    data.todolist.forEach((task) => {
+        if(today == Date.parse(task.dueDate)){
+            // fill main with task that is scheduled for today
+            console.log('1')
+        }
+    });
+    // here
 };
 
 const createAddTaskDiv = () => {
