@@ -58,10 +58,28 @@ const push = (() => {
         _embed();
     };
 
+    const task = (title, date = '', priority = 'priority 4', projectName = 'inbox', 
+      labelName = '') => {
+        let todo = Todo(
+            generateId(),
+            title,
+            date,
+            '',
+            priority,
+            projectName,
+            labelName,
+            'none'
+        );
+
+        _data.todolist.push(todo);
+        _embed();
+    };
+
     return {
         quick,
         project,
-        label
+        label,
+        task
     }
 })();
 
@@ -122,7 +140,7 @@ const dateString = (() => {
 
 
 const test = (function(){
-    console.log(dateString.nextWeekString())
+    console.log(dateString.todayString())
     console.log(Date.parse(dateString.todayString()))
     // const todo = Todo(
     //     1,

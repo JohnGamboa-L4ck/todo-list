@@ -197,18 +197,18 @@ const createAddTaskDiv = () => {
         <input type = "text" placeholder="Task name" id = "addTaskInput">
         <div class = "add-task-btns-container">
             <div>
-                <button id = "selectScheduleBtn">
+                <button id = "selectScheduleBtn" data-value = "">
                     <span class="material-icons-outlined mid">event</span> Schedule
                 </button>
-                <button id = "selectProjectBtn">
+                <button id = "selectProjectBtn" class = "select-project-btn" data-value = "inbox">
                     <span class="material-icons-outlined mid">inbox</span> Inbox
                 </button>
             </div>
             <div>
-                <button id = "selectLabelBtn">
+                <button id = "selectLabelBtn" data-value = "">
                     <span class="material-icons-outlined mid">label</span>
                 </button>
-                <button id = "selectPriorityBtn">
+                <button id = "selectPriorityBtn" data-value = "priority 4">
                     <span class="material-icons-outlined mid">flag</span>
                 </button>
             </div>
@@ -223,10 +223,10 @@ const createAddTaskDiv = () => {
                 <span id = "schedulerTwmSpan"></span>
             </button>
             <button class = "sched" id = "schedulerNextWeekBtn">
-                <span>Next week</span>
+                <span>Next Week</span>
                 <span id = "schedulerNextWeekSpan"></span>
             </button>
-            <div class = "sched-custom">
+            <div class = "sched-custom" id = "schedulerCustomDiv">
                 <input type = "date" id = "schedulerCustomInput">
                 <button id = "schedulerCustomBtn">
                     <span class="material-icons-outlined mid">done</span>
@@ -248,7 +248,7 @@ const createAddTaskDiv = () => {
             </div>
         </div>
         <div class = "prio-setter">
-            <div>
+            <div id = "priorityBtnContainer">
                 <button id = "priorityOne">
                     <span class="material-icons-outlined mid">flag</span>
                     <u>Priority 1</u>

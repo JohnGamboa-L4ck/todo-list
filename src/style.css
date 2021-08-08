@@ -598,6 +598,14 @@ button:focus-visible {
     color: var(--mariner);
 }
 
+.select-project-btn {
+    max-width: 75px;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .scheduler,
 .carrier {
     max-width: 210px;
@@ -650,6 +658,10 @@ button:focus-visible {
 
 .scheduler .sched-custom button {
     border: 1px solid var(--transparent1);
+}
+
+.scheduler .sched-custom input {
+    background: transparent;
 }
 
 .scheduler .sched-custom button > span,

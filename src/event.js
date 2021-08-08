@@ -127,6 +127,7 @@ const toggle = (() => {
         container.div.classList.toggle('add-triggered');
         if (container.div.classList.contains('add-triggered')){
             task.input.value = '';
+            select.reset();
         }
     };
 
@@ -159,7 +160,12 @@ const toggle = (() => {
         }
     };
 
-    const taskPrioritySetter = () => _itemManager('display-prio-setter');
+    const taskPrioritySetter = () => {
+        _itemManager('display-prio-setter');
+        if (task.addDiv.classList.contains('display-prio-setter')){
+            display.taskPriorityList();
+        }
+    };
 
     return {
         menu,
@@ -204,7 +210,7 @@ const display = (() => {
         e.target.classList.add('active');
 
         if(window.innerWidth <= 750){
-            hNav.menu.click();
+            hNav.menu.click();l
         }
         // insert the logic here, load the list of selected display
     };
@@ -223,6 +229,10 @@ const display = (() => {
                 <u>Inbox</u>
             </button>
         `;
+        document.querySelector('#projectDefaultInbox').onclick = select.inbox;
+        if(task.project.dataset.value == 'inbox'){
+            document.querySelector('#projectDefaultInbox').classList.add('active')
+        }
 
         let data = JSON.parse(localStorage.getItem('todos'));
 
@@ -233,17 +243,25 @@ const display = (() => {
                 <u>${project}</u>
             `;
             task.projectSelector.appendChild(button);
+            if(task.project.dataset.value == project){
+                button.classList.add('active')
+            }
+            button.onclick = select.project;            
         });
     };
 
     const taskLabelList = () => {
         task.labelContainer.innerHTML = '';
         task.labelContainer.innerHTML = `
-            <button>
-                <span class="material-icons-outlined mid">label</span>
-                <u>Lorem, ipsum.</u>
+            <button id = "labelNone">
+                <u>No Label</u>
             </button>
         `;
+
+        document.querySelector('#labelNone').onclick = select.noLabel;
+        if(task.label.dataset.value == ''){
+            document.querySelector('#labelNone').classList.add('active')
+        }
 
         let data = JSON.parse(localStorage.getItem('todos'));
 
@@ -254,14 +272,35 @@ const display = (() => {
                 <u>${label}</u>
             `;
             task.labelContainer.appendChild(button);
+            if(task.label.dataset.value == label){
+                button.classList.add('active')
+            }
+            button.onclick = select.label;            
         });
+    };
+
+    const taskPriorityList = () => {
+        task.priorityContainer.querySelectorAll('button').forEach((button) => {
+            button.classList.remove('active');
+        });
+
+        if (task.priority.dataset.value == 'priority 4'){
+            task.priorityFour.classList.add('active');
+        } else if (task.priority.dataset.value == 'priority 3'){
+            task.priorityThree.classList.add('active');
+        } else if (task.priority.dataset.value == 'priority 2'){
+            task.priorityTwo.classList.add('active');
+        } else {
+            task.priorityOne.classList.add('active');
+        }
     };
 
     return {
         todolist,
         home,
         taskProjectList,
-        taskLabelList
+        taskLabelList,
+        taskPriorityList
     };
 })();
 
@@ -314,6 +353,22 @@ const refresh = (() => {
         task.spanToday.innerText = dateString.todayName();
         task.spanTwm.innerText = dateString.tomorrowName();
         task.spanNextWeek.innerText = dateString.nextWeekName();
+
+        document.querySelectorAll('.add-task-div .active').forEach((element)=> {
+            element.classList.remove('active');
+        });
+
+        if (task.schedule.dataset.value == ''){
+            task.schedNoDate.classList.add('active');
+        } else if (task.schedule.innerText == 'Today'){
+            task.schedToday.classList.add('active');
+        } else if (task.schedule.innerText == 'Tomorrow'){
+            task.schedTwm.classList.add('active');
+        } else if (task.schedule.innerText == 'Next Week'){
+            task.schedNextWeek.classList.add('active');
+        } else {
+            task.schedCustomDiv.classList.add('active');
+        }
     };
 
     return {
@@ -361,7 +416,18 @@ const add = (() => {
             alert('Task name required!')
             return;
         }
-        //fix item selection first before fixing this
+
+        push.task(
+            task.input.value,
+            task.schedule.dataset.value,
+            task.priority.dataset.value,
+            task.project.dataset.value,
+            task.label.dataset.value
+        );
+
+        let project = task.project.dataset.value.toUpperCase();
+        alert(`Added to ${project}!`);
+        toggle.taskCreator();
     };
 
     return {
@@ -369,6 +435,85 @@ const add = (() => {
         project,
         label,
         todo
+    };
+})();
+
+const select = (() => {
+    const reset = () => {
+        task.schedule.innerHTML = `
+            <span class="material-icons-outlined mid">event</span> Schedule
+        `;
+        task.schedCustomInput.value = '';
+        task.schedule.dataset.value = '';
+        task.project.dataset.value = 'inbox';
+        task.project.innerHTML = `
+            <span class="material-icons-outlined mid">inbox</span> Inbox
+        `;
+        task.label.dataset.value = '';
+        task.priority.dataset.value = 'priority 4';
+    };
+
+    const schedule = (e) => {
+        if(e.currentTarget.innerText.includes('Today')){
+            task.schedule.innerText = 'Today';
+            task.schedule.dataset.value = dateString.todayString();
+        } else if (e.currentTarget.innerText.includes('Tomorrow')){
+            task.schedule.innerText = 'Tomorrow';
+            task.schedule.dataset.value = dateString.twmString();
+        } else if (e.currentTarget.innerText.includes('Week')){
+            task.schedule.innerText = 'Next Week';
+            task.schedule.dataset.value = dateString.nextWeekString();
+        } else {
+            task.schedule.innerText = 'No Date';
+            task.schedule.dataset.value = '';
+        }
+        toggle.taskScheduler();
+    };
+
+    const customSched = () => {
+        if(!task.schedCustomInput.value){
+            alert('Date required!')
+        } else {
+            task.schedule.innerText = task.schedCustomInput.value;
+            task.schedule.dataset.value = task.schedCustomInput.value;
+            toggle.taskScheduler();
+        }
+    };
+
+    const inbox = (e) => {
+        task.project.innerHTML = `
+            <span class="material-icons-outlined mid">inbox</span> Inbox
+        `;
+        task.project.dataset.value = 'inbox';
+        toggle.taskProjectSelector();
+    };
+
+    const project = (e) => {
+        task.project.innerText = e.currentTarget.outerText.substring(7);
+        task.project.dataset.value = task.project.innerText;
+        toggle.taskProjectSelector();
+    };
+
+    const label = (e) => {
+        task.label.dataset.value = e.currentTarget.outerText.substring(6);
+        toggle.taskLabeler();
+    };
+
+    const noLabel = () => {
+        task.label.dataset.value = '';
+        toggle.taskLabeler();
+    };
+
+    const priority = (e) => {
+        let data = e.currentTarget.outerText.substring(5).toLowerCase();
+        task.priority.dataset.value = data;
+        toggle.taskPrioritySetter();
+    };
+
+    return {
+        reset,
+        schedule, customSched,
+        inbox, project, label, noLabel, priority
     };
 })();
 
@@ -413,7 +558,15 @@ const event = (() => {
     modal.addNewLabel.addEventListener('click', add.label);
 
     task.add.addEventListener('click', add.todo);
+    task.schedToday.addEventListener('click', select.schedule);
+    task.schedTwm.addEventListener('click', select.schedule);
+    task.schedNextWeek.addEventListener('click', select.schedule);
+    task.schedNoDate.addEventListener('click', select.schedule);
+    task.schedCustomBtn.addEventListener('click', select.customSched);
 
+    task.priorityContainer.querySelectorAll('button').forEach((button) => {
+        button.addEventListener('click', select.priority);
+    });
 
     //fix data.js first before adding events in label, project, and todo editor
 

@@ -76,11 +76,12 @@ const task = (() => {
     const schedNextWeek = document.querySelector('#schedulerNextWeekBtn');
     const spanNextWeek = document.querySelector('#schedulerNextWeekSpan');
     const schedCustomInput = document.querySelector('#schedulerCustomInput');
+    const schedCustomDiv = document.querySelector('#schedulerCustomDiv');
     const schedCustomBtn = document.querySelector('#schedulerCustomBtn');
     const schedNoDate = document.querySelector('#schedulerNoDateBtn');
     const projectSelector = document.querySelector('#projectSelector');
-    const projectInbox = document.querySelector('#projectDefaultInbox');
     const labelContainer = document.querySelector('#labelContainer');
+    const priorityContainer = document.querySelector('#priorityBtnContainer');
     const priorityOne = document.querySelector('#priorityOne');
     const priorityTwo = document.querySelector('#priorityTwo');
     const priorityThree = document.querySelector('#priorityThree');
@@ -94,11 +95,11 @@ const task = (() => {
         schedToday, spanToday,
         schedTwm, spanTwm,
         schedNextWeek, spanNextWeek,
-        schedCustomInput, schedCustomBtn,
+        schedCustomInput, schedCustomDiv, schedCustomBtn,
         schedNoDate,
-        projectSelector, projectInbox,
+        projectSelector,
         labelContainer,
-        priorityOne, priorityTwo, priorityThree, priorityFour
+        priorityContainer, priorityOne, priorityTwo, priorityThree, priorityFour
     }
 })();
 
