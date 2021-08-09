@@ -196,8 +196,155 @@ const viewManager = (e) => {
         }
     }
 };
+// here here here here
+const changeMain = (tag, value, condition = '') => {
+    console.log(tag, value, condition)
+    container.main.innerHTML = '';
+    let data = JSON.parse(localStorage.getItem('todos'));
+    let array = [];
+
+
+    if (tag == 'dueDate') {
+        if(condition == 'today'){
+            data.todolist.forEach((task) => {
+                if(Date.parse(task.dueDate) == Date.parse(value)){
+                    array.push(task);
+                }
+            });
+        } else if (condition == 'upcoming'){
+            data.todolist.forEach((task) => {
+                if(Date.parse(task.dueDate) > Date.parse(value)){
+                    array.push(task);
+                }
+            });
+        } else if (condition == 'due'){
+            data.todolist.forEach((task) => {
+                if(Date.parse(task.dueDate) < Date.parse(value)){
+                    array.push(task);
+                }
+            });
+        }
+    }
+    
+    if (tag == 'project') {
+        data.todolist.forEach((task) => {
+            if(task.project == value){
+                array.push(task);
+            }
+        });
+    } 
+    
+    if (tag == 'label') {
+        data.todolist.forEach((task) => {
+            if(task.label == value){
+                array.push(task);
+            }
+        });
+    }
+    
+    if (array.length){
+        array.forEach((task) => {
+            const div = document.createElement('div');
+            div.classList.add('todo');
+            div.setAttribute('tabindex', '0');
+            div.setAttribute('data-id', task.id);
+
+            let priorityClass;
+            if(task.priority == 'priority 4'){
+                priorityClass = 'prio4';
+            } else if (task.priority == 'priority 3'){
+                priorityClass = 'prio3';
+            } else if (task.priority == 'priority 2'){
+                priorityClass = 'prio2';
+            } else {
+                priorityClass = 'prio1';
+            }
+
+            const divCheckbox = document.createElement('div');
+            
+            const buttonCheck = document.createElement('button');
+            buttonCheck.setAttribute('class', `checkbox-btn ${priorityClass}`);
+            buttonCheck.setAttribute('tabindex', '0');
+            divCheckbox.appendChild(buttonCheck);
+            const span = document.createElement('span');
+            span.setAttribute('draggable', 'false');
+            span.innerHTML = '&#x2714;';
+            divCheckbox.appendChild(span);
+
+            const divBody = document.createElement('div');
+            divBody.classList.add('todo-text');
+            const label = document.createElement('label');
+            label.innerText = task.title;
+            const labelDiv = document.createElement('div');
+
+            if (task.label){
+                labelDiv.innerHTML = `<small tabindex="0">${task.label}</small>`;
+            } else {
+                labelDiv.innerHTML = `<small>${task.label}</small>`;
+            }
+
+            const para = document.createElement('p');
+            para.classList.add('todo-text-note');
+
+            if (task.note){
+                para.innerHTML = `
+                <span class="material-icons-outlined mid tool-span">note</span>
+                ${task.note}
+                `;
+            }
+
+            const em = document.createElement('em');
+            if (Date.parse(task.dueDate) > Date.parse(dateString.todayString())){
+                em.classList.add('sched-upcom');
+                em.innerHTML = `
+                <span class="material-icons-outlined mid">event</span> Upcoming
+                `;
+            } else if (Date.parse(task.dueDate) < Date.parse(dateString.todayString())){
+                em.classList.add('sched-due');
+                em.innerHTML = `
+                <span class="material-icons-outlined mid">event</span> Past due
+                `;
+            } else if (Date.parse(task.dueDate) == Date.parse(dateString.todayString())) {
+                em.classList.add('sched-today');
+                em.innerHTML = `
+                <span class="material-icons-outlined mid">event</span> Today
+                `;
+            } else {
+                em.innerHTML = `
+                <span class="material-icons-outlined mid">event</span> No Date
+                `;
+            }
+
+            const divTool = document.createElement('div');
+            divTool.classList.add('todo-tools-container');
+            const buttonEdit = document.createElement('button');
+            buttonEdit.innerHTML = `
+            <span class="material-icons-outlined mid tool-span">edit</span>
+            `;
+            const buttonDelete = document.createElement('button');
+            buttonDelete.innerHTML = `
+            <span class="material-icons-outlined mid tool-span">delete</span>
+            `;
+
+            div.appendChild(divCheckbox);
+            div.appendChild(divBody);
+            divBody.appendChild(label);
+            divBody.appendChild(labelDiv);
+            divBody.appendChild(para);
+            divBody.appendChild(em);
+            divBody.appendChild(divTool);
+            divTool.appendChild(buttonEdit);
+            divTool.appendChild(buttonDelete);
+            // here here // buttonCheck, buttonEdit, buttonDelete. add onclick
+
+            container.main.appendChild(div);
+        });
+    }
+};
 
 const display = (() => {
+    changeMain('dueDate', dateString.todayString(), 'today');
+    // changeMain('label', 'jesus'); //here here
 
     const _getLastWord = (string) => {
         let word = string.split(" ");

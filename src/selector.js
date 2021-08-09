@@ -45,6 +45,7 @@ const vNav = (() => {
 const container = (() => {
     const div = document.querySelector('#container');
     const header = document.querySelector('#header');
+    const main = document.querySelector('main');
     const addTaskBtnDiv = document.querySelector('#addTaskBtnDiv');
     const addTaskBtn = document.querySelector('#addTaskBtn');
     const emptyStateDiv = document.querySelector('#emptyStateDiv');
@@ -54,6 +55,7 @@ const container = (() => {
     return {
         div,
         header,
+        main,
         addTaskBtnDiv, addTaskBtn,
         emptyStateDiv, footer, help
     };
