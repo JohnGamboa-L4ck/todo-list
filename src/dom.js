@@ -1,5 +1,5 @@
 import chillingImg from './chilling.svg';
-import { embedLocalStorage, isEmptyToDoList } from './data.js';
+import { embedLocalStorage, isEmptyToDayList } from './data.js';
 
 'use strict';
 
@@ -166,7 +166,7 @@ const createContainer = () => {
     container.setAttribute('class', 'container');
     container.setAttribute('id', 'container');
 
-    if(isEmptyToDoList()){//fix using dates since it defends on today's data
+    if(isEmptyToDayList()){//fix using dates since it defends on today's data
         container.classList.add('empty');
     }
 

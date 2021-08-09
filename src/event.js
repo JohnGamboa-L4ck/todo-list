@@ -360,12 +360,14 @@ const display = (() => {
             hNav.menu.click();l
         }
         // insert the logic here, load the list of selected display
+        
     };
 
     const home = () => {
         container.header.innerText = 'Today';
         document.querySelector('.info-comp .active').classList.remove('active');
         vNav.today.classList.add('active');
+        changeMain('dueDate', dateString.todayString(), 'today');
     };
 
     const taskProjectList = () => {

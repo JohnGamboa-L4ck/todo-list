@@ -9,9 +9,17 @@ const Todo = function( id, title, dueDate, note, priority, project, label, dueDa
     return { id, title, dueDate, note, priority, project, label, dueDateNotifSent }
 };
 
-const isEmptyToDoList = () => {
+const isEmptyToDayList = () => {
     let data = JSON.parse(localStorage.getItem('todos'));
-    return !data.todolist.length ? true : false;
+    let array = [];
+
+    data.todolist.forEach((task) => {
+        if(Date.parse(task.dueDate) == Date.parse(dateString.today())){
+            array.push(task);
+        }
+    });
+
+    return !array.length ? true : false;
 };
 
 const push = (() => {
@@ -190,7 +198,7 @@ const test = (function(){
 
 export { 
     embedLocalStorage,
-    isEmptyToDoList,
+    isEmptyToDayList,
     test,
     push,
     dateString
