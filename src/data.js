@@ -24,6 +24,7 @@ const isEmptyToDayList = () => {
 
 const push = (() => {
     let _data = JSON.parse(localStorage.getItem('todos'));
+    let counter = 0;
 
     const _embed = () => {
         localStorage.setItem('todos', JSON.stringify(_data));
@@ -33,7 +34,7 @@ const push = (() => {
         let id = _data.todolist.length + 1;
 
         if(_data.todolist.length){
-            let counter = 0;
+            counter = 0;
             _data.todolist.forEach(() => {
                 if(_data.todolist[counter].id == id) { id++; }
             });
@@ -83,11 +84,96 @@ const push = (() => {
         _embed();
     };
 
+    const projectRename = (oldName, newName) => {
+
+        counter = 0;
+        _data = JSON.parse(localStorage.getItem('todos'));
+
+        _data.projects.forEach((name) => {
+            if(name == oldName){
+                _data.projects[counter] = newName;
+            }
+            counter++
+        });
+
+        counter = 0;
+        _data.todolist.forEach((task) => {
+            if(task.project == oldName){
+                _data.todolist[counter].project = newName;
+            }
+            counter++
+        });
+        
+        _embed();
+    };
+
+    const projectDelete = (name) => {
+
+        _data = JSON.parse(localStorage.getItem('todos'));
+        const index = _data.projects.indexOf(name);
+        
+        if (index > -1) {
+            _data.projects.splice(index, 1);
+        }
+
+        counter = 0;
+        _data.todolist.forEach((task) => {
+            if(task.project == name){
+                _data.todolist.splice(counter, 1);
+            }
+            counter++
+        });
+        _embed();
+    };
+
+    const labelRename = (oldName, newName) => {
+
+        counter = 0;
+        _data = JSON.parse(localStorage.getItem('todos'));
+
+        _data.labels.forEach((name) => {
+            if(name == oldName){
+                _data.labels[counter] = newName;
+            }
+            counter++
+        });
+
+        counter = 0;
+        _data.todolist.forEach((task) => {
+            if(task.label == oldName){
+                _data.todolist[counter].label = newName;
+            }
+            counter++
+        });
+        _embed();
+    };
+
+    const labelDelete = (name) => {
+
+        _data = JSON.parse(localStorage.getItem('todos'));
+        const index = _data.labels.indexOf(name);
+
+        if (index > -1) {
+            _data.labels.splice(index, 1);
+        }
+
+        counter = 0;
+        _data.todolist.forEach((task) => {
+            if(task.label == name){
+                _data.todolist.splice(counter, 1);
+            }
+            counter++
+        });
+        _embed();
+    };
+
     return {
         quick,
         project,
         label,
-        task
+        task,
+        projectRename, projectDelete,
+        labelRename, labelDelete
     }
 })();
 

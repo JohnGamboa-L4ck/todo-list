@@ -426,11 +426,6 @@ em > span {
     font-size: .9rem!important;
 }
 
-.todo-text small:hover,
-.todo-text small:focus-visible {
-    text-decoration: underline;
-}
-
 em {
     width: 100%;
 }

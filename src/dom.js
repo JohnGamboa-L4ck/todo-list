@@ -166,7 +166,7 @@ const createContainer = () => {
     container.setAttribute('class', 'container');
     container.setAttribute('id', 'container');
 
-    if(isEmptyToDayList()){//fix using dates since it defends on today's data
+    if(isEmptyToDayList()){
         container.classList.add('empty');
     }
 
@@ -194,7 +194,7 @@ const createAddTaskDiv = () => {
     div.setAttribute('class', 'add-task-div');
     div.setAttribute('id', 'addTaskDiv');
     div.innerHTML = `
-        <input type = "text" placeholder="Task name" id = "addTaskInput">
+        <input type = "text" placeholder="Task name" id = "addTaskInput" autocomplete="off">
         <div class = "add-task-btns-container">
             <div>
                 <button id = "selectScheduleBtn" data-value = "">

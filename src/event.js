@@ -90,6 +90,9 @@ const toggle = (() => {
     const projects = () => {
         vNav.projectListContainer.classList.toggle('show');
         vNav.projectChevron.classList.toggle('rotate');
+        if (vNav.projectListContainer.classList.contains('show')){
+            refresh.projectList();
+        }
     };
 
     const addProject = (e) => {
@@ -108,6 +111,9 @@ const toggle = (() => {
     const labels = () => {
         vNav.labelListContainer.classList.toggle('show');
         vNav.labelChevron.classList.toggle('rotate');
+        if (vNav.labelListContainer.classList.contains('show')){
+            refresh.labelList();
+        }
     };
 
     const addLabel = (e) => {
@@ -167,13 +173,36 @@ const toggle = (() => {
         }
     };
 
+    const projectEditor = () => {
+        modal.projectEditor.classList.toggle('on');
+        if(modal.projectEditor.classList.contains('on')){
+            modal.updatedProjectName.value = '';
+            trapFocus(modal.projectEditor, vNav.projects);
+        } else {
+            vNav.projects.focus();
+            removeTrapFocus();
+        }
+    };
+
+    const labelEditor = () => {
+        modal.labelEditor.classList.toggle('on');
+        if(modal.labelEditor.classList.contains('on')){
+            modal.updatedLabelName.value = '';
+            trapFocus(modal.labelEditor, vNav.labels);
+        } else {
+            vNav.labels.focus();
+            removeTrapFocus();
+        }
+    };
+
     return {
         menu,
         quickAddTask,
         notification,
         projects, addProject,
         labels, addLabel,
-        taskCreator, taskScheduler, taskProjectSelector, taskLabeler, taskPrioritySetter
+        taskCreator, taskScheduler, taskProjectSelector, taskLabeler, taskPrioritySetter,
+        projectEditor, labelEditor
     };
 })();
 
@@ -195,10 +224,15 @@ const viewManager = (e) => {
             task.addDiv.className = 'add-task-div';
         }
     }
+
+    if (container.main.hasChildNodes()) {
+        container.div.classList.remove('empty');
+    } else {
+        container.div.classList.add('empty');
+    }
 };
 // here here here here
 const changeMain = (tag, value, condition = '') => {
-    console.log(tag, value, condition)
     container.main.innerHTML = '';
     let data = JSON.parse(localStorage.getItem('todos'));
     let array = [];
@@ -243,6 +277,10 @@ const changeMain = (tag, value, condition = '') => {
     }
     
     if (array.length){
+        array.sort(function(a, b) {
+            return (Date.parse(a.dueDate) - Date.parse(b.dueDate));
+        })
+
         array.forEach((task) => {
             const div = document.createElement('div');
             div.classList.add('todo');
@@ -278,9 +316,17 @@ const changeMain = (tag, value, condition = '') => {
             const labelDiv = document.createElement('div');
 
             if (task.label){
-                labelDiv.innerHTML = `<small tabindex="0">${task.label}</small>`;
+                if (task.project != 'inbox'){
+                    labelDiv.innerHTML = `<small>[Project: ${task.project}] [label: ${task.label}]</small>`;
+                } else {
+                    labelDiv.innerHTML = `<small>label: ${task.label}</small>`;
+                }
             } else {
-                labelDiv.innerHTML = `<small>${task.label}</small>`;
+                if (task.project != 'inbox'){
+                    labelDiv.innerHTML = `<small>[Project: ${task.project}]</small>`;
+                } else {
+                    labelDiv.innerHTML = `<small></small>`;
+                }
             }
 
             const para = document.createElement('p');
@@ -296,9 +342,16 @@ const changeMain = (tag, value, condition = '') => {
             const em = document.createElement('em');
             if (Date.parse(task.dueDate) > Date.parse(dateString.todayString())){
                 em.classList.add('sched-upcom');
-                em.innerHTML = `
-                <span class="material-icons-outlined mid">event</span> Upcoming
-                `;
+                if(Date.parse(task.dueDate) == Date.parse(dateString.twmString())){
+                    em.innerHTML = `
+                    <span class="material-icons-outlined mid">event</span> Tomorrow
+                    `;
+                } else {
+                    em.innerHTML = `
+                    <span class="material-icons-outlined mid">event</span> ${task.dueDate}
+                    `;
+                }
+                
             } else if (Date.parse(task.dueDate) < Date.parse(dateString.todayString())){
                 em.classList.add('sched-due');
                 em.innerHTML = `
@@ -343,8 +396,6 @@ const changeMain = (tag, value, condition = '') => {
 };
 
 const display = (() => {
-    changeMain('dueDate', dateString.todayString(), 'today');
-    // changeMain('label', 'jesus'); //here here
 
     const _getLastWord = (string) => {
         let word = string.split(" ");
@@ -352,22 +403,44 @@ const display = (() => {
     };
 
     const todolist = (e) => {
-        container.header.innerText = _getLastWord(e.target.innerText);
-        document.querySelector('.info-comp .active').classList.remove('active');
+        let word = _getLastWord(e.target.innerText);
+        container.header.innerText = word;
+        
+        if(document.querySelector('.info-comp .active')){
+            document.querySelector('.info-comp .active').classList.remove('active');
+        }
+
         e.target.classList.add('active');
 
         if(window.innerWidth <= 750){
-            hNav.menu.click();l
+            hNav.menu.click();
         }
-        // insert the logic here, load the list of selected display
-        
+
+        if(word == 'Today'){
+            changeMain('dueDate', dateString.todayString(), 'today');
+        } else if (word == 'Upcoming') {
+            changeMain('dueDate', dateString.todayString(), 'upcoming');
+        } else {
+            changeMain('project', 'inbox');
+        }
     };
 
     const home = () => {
         container.header.innerText = 'Today';
-        document.querySelector('.info-comp .active').classList.remove('active');
+        if(document.querySelector('.info-comp .active')){
+            document.querySelector('.info-comp .active').classList.remove('active');
+        }
         vNav.today.classList.add('active');
         changeMain('dueDate', dateString.todayString(), 'today');
+    };
+
+    const inbox = () => {
+        container.header.innerText = 'Inbox';
+        if(document.querySelector('.info-comp .active')){
+            document.querySelector('.info-comp .active').classList.remove('active');
+        }
+        vNav.inbox.classList.add('active');
+        changeMain('project', 'inbox');
     };
 
     const taskProjectList = () => {
@@ -446,54 +519,90 @@ const display = (() => {
 
     return {
         todolist,
-        home,
+        home, inbox,
         taskProjectList,
         taskLabelList,
-        taskPriorityList
+        taskPriorityList,
     };
 })();
+
+// here
+const displayTask = (target, name) => {
+
+    container.header.innerText = `${target.toUpperCase()} > ${name}`;
+    if(document.querySelector('.info-comp .active')){
+        document.querySelector('.info-comp .active').classList.remove('active');
+    }
+
+    if(window.innerWidth <= 750){
+        hNav.menu.click();
+    }
+
+    changeMain(target, name);
+};
 
 const refresh = (() => {
     let data;
 
     const projectList = () => {
         data = JSON.parse(localStorage.getItem('todos'));
+        vNav.projectListContainer.innerHTML = '';
 
         if (data.projects.length){
-            document.querySelector('#projectListContainer').innerHTML = '';
-
             data.projects.forEach((project)=> {
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <div class = "bullet"></div>
-                        <span class = "unique">${project}</span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                `;
+                    <span class = "unique">${project}</span>`;
+                const horizBtn = document.createElement('button');
+                horizBtn.setAttribute('data-value', project);
+                horizBtn.innerHTML = `
+                    <span class="material-icons-outlined mid">more_horiz</span>`;
+                div.appendChild(horizBtn);
                 div.setAttribute('tabindex', '0');
-                document.querySelector('#projectListContainer').appendChild(div);  
+                vNav.projectListContainer.appendChild(div);
+                div.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    displayTask('project', project);
+                };
+                horizBtn.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    modal.projectName.dataset.value = project;
+                    modal.projectName.innerText = project;
+                    toggle.projectEditor();
+                };
             });
         }
     };
 
     const labelList = () => {
         data = JSON.parse(localStorage.getItem('todos'));
+        vNav.labelListContainer.innerHTML = '';
 
         if (data.labels.length){
-            document.querySelector('#labelListContainer').innerHTML = '';
-
             data.labels.forEach((label)=> {
+
                 const div = document.createElement('div');
                 div.innerHTML = `
                     <span class="material-icons-outlined mid tag">label</span>
-                        <span class = "unique">${label}</span>
-                    <button>
-                        <span class="material-icons-outlined mid">more_horiz</span>
-                    </button>
-                `;
+                        <span class = "unique">${label}</span>`;
+                const horizBtn = document.createElement('button');
+                horizBtn.setAttribute('data-value', label);
+                horizBtn.innerHTML = `
+                    <span class="material-icons-outlined mid">more_horiz</span>`;
+                div.appendChild(horizBtn);
                 div.setAttribute('tabindex', '0');
-                document.querySelector('#labelListContainer').appendChild(div);   
+                vNav.labelListContainer.appendChild(div);
+                div.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    displayTask('label', label);
+                };
+                horizBtn.onclick = (e) => { 
+                    e.stopPropagation(); 
+                    modal.editLabelName.dataset.value = label;
+                    modal.editLabelName.innerText = label;
+                    toggle.labelEditor();
+                };
             });
         }
     };
@@ -535,7 +644,7 @@ const add = (() => {
         }
         push.quick(modal.quickAddTaskInput.value);
         toggle.quickAddTask();
-        setTimeout(()=> alert('Added to Inbox!'), 500);
+        display.inbox();
     };
 
     const project = () => {
@@ -575,7 +684,12 @@ const add = (() => {
         );
 
         let project = task.project.dataset.value.toUpperCase();
-        alert(`Added to ${project}!`);
+        if(project != 'INBOX'){
+            alert(`Added to Project ${project}!`);
+        }
+
+        (project == 'INBOX') ? display.inbox() : display.home();
+
         toggle.taskCreator();
     };
 
@@ -585,6 +699,71 @@ const add = (() => {
         label,
         todo
     };
+})();
+
+const update = (() => {
+
+    const project = () => {
+
+        if (!modal.updatedProjectName.value) { 
+            alert('Project name required!');
+            return; 
+        }
+
+        if (modal.updatedProjectName.value == modal.projectName.dataset.value){
+            alert('Enter a different Project name!');
+            return;
+        }
+        push.projectRename(modal.projectName.dataset.value, modal.updatedProjectName.value);
+        toggle.projectEditor();
+        display.home();
+        refresh.projectList();
+    };
+
+    const label = () => {
+
+        if (!modal.updatedLabelName.value) { 
+            alert('Label name required!');
+            return; 
+        }
+
+        if (modal.updatedLabelName.value == modal.editLabelName.dataset.value){
+            alert('Enter a different Label name!');
+            return;
+        }
+        push.labelRename(modal.editLabelName.dataset.value, modal.updatedLabelName.value);
+        toggle.labelEditor();
+        display.home();
+        refresh.labelList();
+    };
+
+    return {
+        project,
+        label
+    };
+})();
+
+const remove = (() => {
+
+    const project = () => {
+        push.projectDelete(modal.projectName.dataset.value);
+        toggle.projectEditor();
+        display.home();
+        refresh.projectList();
+    };
+
+    const label = () => {
+        push.labelDelete(modal.editLabelName.dataset.value);
+        toggle.labelEditor();
+        display.home();
+        refresh.labelList();
+    };
+
+    return {
+        project,
+        label
+    };
+
 })();
 
 const select = (() => {
@@ -728,6 +907,14 @@ const event = (() => {
         button.addEventListener('click', select.priority);
     });
 
+    modal.cancelProjectEditor.addEventListener('click', toggle.projectEditor);
+    modal.updateProject.addEventListener('click', update.project);
+    modal.deleteProject.addEventListener('click', remove.project);
+
+    modal.cancelLabelEditor.addEventListener('click', toggle.labelEditor);
+    modal.updateLabel.addEventListener('click', update.label);
+    modal.deleteLabel.addEventListener('click', remove.label);
+
     //fix data.js first before adding events in label, project, and todo editor
 
     window.onclick = viewManager;
@@ -737,4 +924,5 @@ const event = (() => {
 
 })();
 
+changeMain('dueDate', dateString.todayString(), 'today');
 export default event;
