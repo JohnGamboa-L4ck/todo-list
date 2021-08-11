@@ -52,7 +52,7 @@ const createAppNav = () => {
                     <span class="material-icons-outlined mid">search</span>
                     <input type="search" aria-label="Search through all todos" 
                         class = "search-input" placeholder="Search"
-                        id = "navInputSearch">
+                        id = "navInputSearch" required>
                     <button type = "reset">
                         <span class="material-icons-outlined mid">close</span>
                     </button>

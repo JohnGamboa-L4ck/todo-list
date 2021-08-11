@@ -195,12 +195,11 @@ const toggle = (() => {
         }
     };
 
-    // here, trap focus 
     const taskEditor = (id) => { 
         modal.taskEditor.classList.toggle('on');
         if(modal.taskEditor.classList.contains('on')){
             modal.taskEditor.setAttribute('data-id', id)
-            refresh.taskEditor();
+            refresh.taskEditor(id);
             trapFocus(modal.taskEditor, hNav.plus);
         } else {
             hNav.plus.focus();
@@ -244,7 +243,7 @@ const viewManager = (e) => {
         container.div.classList.add('empty');
     }
 };
-// here here here here
+
 const changeMain = (tag, value, condition = '') => {
     container.main.innerHTML = '';
     let data = JSON.parse(localStorage.getItem('todos'));
@@ -298,6 +297,7 @@ const changeMain = (tag, value, condition = '') => {
             const div = document.createElement('div');
             div.classList.add('todo');
             div.setAttribute('tabindex', '0');
+            div.setAttribute('id', task.id);
 
             let priorityClass;
             if(task.priority == 'priority 4'){
@@ -395,12 +395,15 @@ const changeMain = (tag, value, condition = '') => {
             divBody.appendChild(em);
             divBody.appendChild(divTool);
             divTool.appendChild(buttonEdit);
-            // here here // buttonCheck, buttonEdit. add onclick
-
+            
             container.main.appendChild(div);
 
             buttonEdit.onclick = () => { 
                 toggle.taskEditor(task.id);
+            };
+
+            buttonCheck.onclick = () => { 
+                remove.task(task.id);
             };
         });
     }
@@ -537,7 +540,6 @@ const display = (() => {
     };
 })();
 
-// here
 const displayTask = (target, name) => {
 
     container.header.innerText = `${target.toUpperCase()} > ${name}`;
@@ -640,26 +642,56 @@ const refresh = (() => {
         }
     };
 
-    const taskEditor = () => {
-        // here
-        // modal.updatedTaskName.value = '';
-        //     modal.updatedTaskName.setAttribute('placeholder', title);
-        //     modal.updatedTaskNote.value = '';
-        //     modal.updatedTaskNote.setAttribute('placeholder', note);
-        // put all placeholder and value of the editing task here
-        // modal.updatedTaskSched.innerHTML = `
-        //     <option value="${dateString.todayString()}">Today</option>
-        //     <option value="${dateString.twmString()}">Tomorrow</option>
-        //     <option value="${dateString.nextWeekString()}">Next Week</option>
-        //     <option value="custom">Custom</option>
-        //     <option value="">No Date</option>
-        // `;
+    const taskEditor = (id) => {
+        modal.updatedTaskName.value = '';
+        modal.updatedTaskNote.value = '';
+        modal.updatedTaskSched.value = '';
         modal.updatedTaskProject.innerHTML = `
-            <option value="inbox">Inbox</option>
-        `;
+            <option value="inbox">Inbox</option>`;
         modal.updatedTaskLabel.innerHTML = `
-            <option value="none">None</option>
-        `;
+            <option value="">None</option>`;
+
+        data = JSON.parse(localStorage.getItem('todos'));
+
+        data.projects.forEach((project) => {
+            const option = document.createElement('option');
+            option.setAttribute('value', project);
+            option.innerText = project;
+            modal.updatedTaskProject.appendChild(option);
+        });
+
+        data.labels.forEach((label) => {
+            const option = document.createElement('option');
+            option.setAttribute('value', label);
+            option.innerText = label;
+            modal.updatedTaskLabel.appendChild(option);
+        });
+
+        data.todolist.forEach((task) => {
+            if(task.id === id){
+                modal.updatedTaskName.value = task.title;
+                modal.updatedTaskNote.value = task.note;
+                modal.updatedTaskProject.value = '';
+
+                if (task.dueDate){
+                    let dueDate = task.dueDate.split('-');
+                    if (dueDate[1].length == 1){
+                        dueDate[1] = `0${dueDate[1]}`;
+                        dueDate = dueDate.join('-');
+                        modal.updatedTaskSched.value = dueDate;
+                    } else {
+                        modal.updatedTaskSched.value = task.dueDate;
+                    }
+                }
+
+                if (task.project){
+                    modal.updatedTaskProject.value = task.project;
+                }
+
+                modal.updatedTaskLabel.value = task.label;
+                modal.updatedTaskPriority.value = task.priority;
+            }
+        });
     }; 
 
     return {
@@ -771,9 +803,28 @@ const update = (() => {
         refresh.labelList();
     };
 
+    const task = () => {
+        push.taskUpdate(
+            modal.taskEditor.dataset.id,
+            modal.updatedTaskName.value,
+            modal.updatedTaskNote.value,
+            modal.updatedTaskSched.value,
+            modal.updatedTaskProject.value,
+            modal.updatedTaskLabel.value,
+            modal.updatedTaskPriority.value
+        );
+        if(modal.updatedTaskProject.value == 'inbox'){
+            display.inbox();
+        } else {
+            display.home();
+        }
+        toggle.taskEditor();
+    };
+
     return {
         project,
-        label
+        label,
+        task
     };
 })();
 
@@ -793,9 +844,15 @@ const remove = (() => {
         refresh.labelList();
     };
 
+    const task = (id) => {
+        push.taskChecked(id);
+        document.querySelector(`[id="${id}"]`).remove();
+    };
+
     return {
         project,
-        label
+        label,
+        task
     };
 
 })();
@@ -950,14 +1007,16 @@ const event = (() => {
     modal.deleteLabel.addEventListener('click', remove.label);
 
     modal.cancelTaskEditor.addEventListener('click', toggle.taskEditor);
+    modal.updateTask.addEventListener('click', update.task);
 
-    //fix data.js first before adding events in label, project, and todo editor
+    hNav.formSearch.onsubmit = (e) => {
+        e.preventDefault();
+        alert(`Feature Not Implemented :( \r\n
+            The Odin Project didn't give it as a requirement, so I got a bit _(:3」∠)_`);
+    };
 
     window.onclick = viewManager;
     window.onresize = viewportListener;
-
-    //esc keyup that closes modals will be cool
-
 })();
 
 changeMain('dueDate', dateString.todayString(), 'today');

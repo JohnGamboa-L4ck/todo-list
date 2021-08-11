@@ -167,13 +167,47 @@ const push = (() => {
         _embed();
     };
 
+    const taskUpdate = (targetID, newTitle, newNote, newDueDate, 
+      newProject, newLabel, newPriority) => {
+
+        _data = JSON.parse(localStorage.getItem('todos'));
+        counter = 0;
+        _data.todolist.forEach((task) => {
+            if(task.id == targetID){
+                _data.todolist[counter].title = newTitle;
+                _data.todolist[counter].note = newNote;
+                _data.todolist[counter].dueDate = newDueDate;
+                _data.todolist[counter].project = newProject;
+                _data.todolist[counter].label = newLabel;
+                _data.todolist[counter].priority = newPriority;
+            }
+            counter++;
+        });
+        _embed();
+    };
+
+    const taskChecked = (id) => {
+        _data = JSON.parse(localStorage.getItem('todos'));
+        counter = 0;
+
+        _data.todolist.forEach((task) => {
+            if(task.id === id){
+                _data.todolist.splice(counter, 1);
+            }
+            counter++
+        });
+        
+        _embed();
+    };
+
     return {
         quick,
         project,
         label,
         task,
         projectRename, projectDelete,
-        labelRename, labelDelete
+        labelRename, labelDelete,
+        taskUpdate, taskChecked
     }
 })();
 
@@ -232,60 +266,9 @@ const dateString = (() => {
     };
 })();
 
-
-const test = (function(){
-    // console.log(dateString.todayString())
-    // console.log(Date.parse(dateString.todayString()))
-    // const todo = Todo(
-    //     1,
-    //     'finish todo',
-    //     '2021-07-31',
-    //     '',
-    //     'priority 1',
-    //     'inbox',
-    //     '',
-    //     'none'
-    // );
-    // let array = JSON.parse(localStorage.getItem('todos'));
-    // if(!array.length){
-    //     array.push(todo);
-    //     localStorage.setItem('todos', JSON.stringify(array));
-    // }
-    // console.log(todo)
-
-    // var dateControl = document.querySelector('input[type="date"]');
-    // dateControl.value = '2017-06-01';
-    // console.log(dateControl.value); // prints "2017-06-01"
-    // console.log(dateControl.valueAsNumber); // prints 1496275200000, a JavaScript timestamp (ms)
-
-    // const datax = '2021-08-8';
-    // console.log(datax);
-    // console.log(Date.parse(datax))
-    // // console.log(datax.valueAsNumber)
-
-    // const today = new Date();
-    // today.setHours(0,0,0,0);
-    // console.log('today', today);
-    // console.log('today number', Date.parse(today));
-
-    // const tomorrow = new Date()
-    // tomorrow.setDate(tomorrow.getDate() + 1)
-    // tomorrow.setHours(0,0,0,0);
-    // console.log(tomorrow);
-    // console.log(Date.parse(tomorrow))
-
-    // let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    // let d = new Date(); //or dateString
-    // let dayName = days[d.getDay()];
-    // console.log(dayName)
-
-    // console.log(dateString.nextWeek());
-})();
-
 export { 
     embedLocalStorage,
     isEmptyToDayList,
-    test,
     push,
     dateString
 };
