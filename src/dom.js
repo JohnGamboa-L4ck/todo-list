@@ -386,32 +386,22 @@ const createHiddenModals = () => {
             <div>
                 <strong>Edit Task</strong>
                 <div class = "todo-editor-input">
-                    <label for="updatedTaskName">Task Name</label>
+                    <label for="updatedTaskName">Task Title</label>
                     <input type = "text" id = "updatedTaskName">
                     <label for="updatedTaskNote">Task Note</label>
                     <input type = "text" id = "updatedTaskNote">
                     <label for="updatedTaskSchedule">Schedule</label>
-                    <select id="updatedTaskSchedule">
-                        <option value="today">Today</option>
-                        <option value="tomorrow">Tomorrow</option>
-                        <option value="next-week">Next Week</option>
-                        <option value="custom">Custom</option>
-                        <option value="no-date">No Date</option>
-                    </select>
+                    <input type = "date" id="updatedTaskSchedule">
                     <label for="updatedTaskProject">Project</label>
-                    <select id="updatedTaskProject">
-                        <option value="Inbox">Inbox</option>
-                    </select>
+                    <select id="updatedTaskProject"></select>
                     <label for="updatedTaskLabel">Label</label>
-                    <select id="updatedTaskLabel">
-                        <option value="none">None</option>
-                    </select>
+                    <select id="updatedTaskLabel"></select>
                     <label for="updatedTaskPriority">Priority</label>
                     <select id="updatedTaskPriority">
-                        <option value="priority1">Priority 1</option>
-                        <option value="priority2">Priority 2</option>
-                        <option value="priority3">Priority 3</option>
-                        <option value="priority4">Priority 4</option>
+                        <option value="priority 1">Priority 1</option>
+                        <option value="priority 2">Priority 2</option>
+                        <option value="priority 3">Priority 3</option>
+                        <option value="priority 4">Priority 4</option>
                     </select>
                 </div>
                 <div class = "todo-editor-buttons">

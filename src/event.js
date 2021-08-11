@@ -195,6 +195,19 @@ const toggle = (() => {
         }
     };
 
+    // here, trap focus 
+    const taskEditor = (id) => { 
+        modal.taskEditor.classList.toggle('on');
+        if(modal.taskEditor.classList.contains('on')){
+            modal.taskEditor.setAttribute('data-id', id)
+            refresh.taskEditor();
+            trapFocus(modal.taskEditor, hNav.plus);
+        } else {
+            hNav.plus.focus();
+            removeTrapFocus();
+        }
+    };
+
     return {
         menu,
         quickAddTask,
@@ -202,7 +215,7 @@ const toggle = (() => {
         projects, addProject,
         labels, addLabel,
         taskCreator, taskScheduler, taskProjectSelector, taskLabeler, taskPrioritySetter,
-        projectEditor, labelEditor
+        projectEditor, labelEditor, taskEditor
     };
 })();
 
@@ -285,7 +298,6 @@ const changeMain = (tag, value, condition = '') => {
             const div = document.createElement('div');
             div.classList.add('todo');
             div.setAttribute('tabindex', '0');
-            div.setAttribute('data-id', task.id);
 
             let priorityClass;
             if(task.priority == 'priority 4'){
@@ -374,10 +386,6 @@ const changeMain = (tag, value, condition = '') => {
             buttonEdit.innerHTML = `
             <span class="material-icons-outlined mid tool-span">edit</span>
             `;
-            const buttonDelete = document.createElement('button');
-            buttonDelete.innerHTML = `
-            <span class="material-icons-outlined mid tool-span">delete</span>
-            `;
 
             div.appendChild(divCheckbox);
             div.appendChild(divBody);
@@ -387,10 +395,13 @@ const changeMain = (tag, value, condition = '') => {
             divBody.appendChild(em);
             divBody.appendChild(divTool);
             divTool.appendChild(buttonEdit);
-            divTool.appendChild(buttonDelete);
-            // here here // buttonCheck, buttonEdit, buttonDelete. add onclick
+            // here here // buttonCheck, buttonEdit. add onclick
 
             container.main.appendChild(div);
+
+            buttonEdit.onclick = () => { 
+                toggle.taskEditor(task.id);
+            };
         });
     }
 };
@@ -629,10 +640,33 @@ const refresh = (() => {
         }
     };
 
+    const taskEditor = () => {
+        // here
+        // modal.updatedTaskName.value = '';
+        //     modal.updatedTaskName.setAttribute('placeholder', title);
+        //     modal.updatedTaskNote.value = '';
+        //     modal.updatedTaskNote.setAttribute('placeholder', note);
+        // put all placeholder and value of the editing task here
+        // modal.updatedTaskSched.innerHTML = `
+        //     <option value="${dateString.todayString()}">Today</option>
+        //     <option value="${dateString.twmString()}">Tomorrow</option>
+        //     <option value="${dateString.nextWeekString()}">Next Week</option>
+        //     <option value="custom">Custom</option>
+        //     <option value="">No Date</option>
+        // `;
+        modal.updatedTaskProject.innerHTML = `
+            <option value="inbox">Inbox</option>
+        `;
+        modal.updatedTaskLabel.innerHTML = `
+            <option value="none">None</option>
+        `;
+    }; 
+
     return {
         projectList,
         labelList,
-        schedule
+        schedule,
+        taskEditor
     };
 })();
 
@@ -914,6 +948,8 @@ const event = (() => {
     modal.cancelLabelEditor.addEventListener('click', toggle.labelEditor);
     modal.updateLabel.addEventListener('click', update.label);
     modal.deleteLabel.addEventListener('click', remove.label);
+
+    modal.cancelTaskEditor.addEventListener('click', toggle.taskEditor);
 
     //fix data.js first before adding events in label, project, and todo editor
 

@@ -1064,6 +1064,7 @@ button:focus-visible {
 .project-input input:focus-visible,
 .label-input input:focus-visible,
 .todo-editor-input input:focus-visible,
+.todo-editor-input select:focus-visible,
 .project-editor-input input:focus-visible,
 .label-editor-input input:focus-visible {
     outline: 1px solid var(--transparent2);
